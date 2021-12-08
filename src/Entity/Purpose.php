@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyRepository;
+use App\Repository\PurposeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ * @ORM\Entity(repositoryClass=PurposeRepository::class)
  */
-class Company
+class Purpose
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Company
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="pay_owner")
+     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="purose")
      */
     private $moneyMoves;
 
@@ -68,7 +68,7 @@ class Company
     {
         if (!$this->moneyMoves->contains($moneyMove)) {
             $this->moneyMoves[] = $moneyMove;
-            $moneyMove->setPayOwner($this);
+            $moneyMove->setPurose($this);
         }
 
         return $this;
@@ -78,8 +78,8 @@ class Company
     {
         if ($this->moneyMoves->removeElement($moneyMove)) {
             // set the owning side to null (unless already changed)
-            if ($moneyMove->getPayOwner() === $this) {
-                $moneyMove->setPayOwner(null);
+            if ($moneyMove->getPurose() === $this) {
+                $moneyMove->setPurose(null);
             }
         }
 

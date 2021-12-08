@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyRepository;
+use App\Repository\MoneyMoveTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ * @ORM\Entity(repositoryClass=MoneyMoveTypeRepository::class)
  */
-class Company
+class MoneyMoveType
 {
     /**
      * @ORM\Id
@@ -20,23 +20,29 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="pay_owner")
+     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="move_type")
      */
     private $moneyMoves;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="money_move_type", orphanRemoval=true)
+     */
+    private $moneyMove;
 
     public function __construct()
     {
         $this->moneyMoves = new ArrayCollection();
+        $this->moneyMove = new ArrayCollection();
     }
 
     public function __toString():string
     {
-        return $this->getName();
+       return $this->getName();
     }
 
     public function getId(): ?int
@@ -49,7 +55,7 @@ class Company
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -68,7 +74,7 @@ class Company
     {
         if (!$this->moneyMoves->contains($moneyMove)) {
             $this->moneyMoves[] = $moneyMove;
-            $moneyMove->setPayOwner($this);
+            $moneyMove->setMoveType($this);
         }
 
         return $this;
@@ -78,11 +84,19 @@ class Company
     {
         if ($this->moneyMoves->removeElement($moneyMove)) {
             // set the owning side to null (unless already changed)
-            if ($moneyMove->getPayOwner() === $this) {
-                $moneyMove->setPayOwner(null);
+            if ($moneyMove->getMoveType() === $this) {
+                $moneyMove->setMoveType(null);
             }
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|MoneyMove[]
+     */
+    public function getMoneyMove(): Collection
+    {
+        return $this->moneyMove;
     }
 }

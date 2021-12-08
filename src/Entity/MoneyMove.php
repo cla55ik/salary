@@ -43,6 +43,21 @@ class MoneyMove
      */
     private $salary;
 
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Purpose::class, inversedBy="moneyMoves")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $purose;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=MoneyMoveType::class, inversedBy="moneyMove")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $money_move_type;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +119,33 @@ class MoneyMove
     public function setSalary(?Salary $salary): self
     {
         $this->salary = $salary;
+
+        return $this;
+    }
+
+
+    public function getPurose(): ?Purpose
+    {
+        return $this->purose;
+    }
+
+    public function setPurose(?Purpose $purose): self
+    {
+        $this->purose = $purose;
+
+        return $this;
+    }
+
+
+
+    public function getMoneyMoveType(): ?MoneyMoveType
+    {
+        return $this->money_move_type;
+    }
+
+    public function setMoneyMoveType(?MoneyMoveType $money_move_type): self
+    {
+        $this->money_move_type = $money_move_type;
 
         return $this;
     }
