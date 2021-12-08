@@ -20,6 +20,7 @@ class SalaryCrudController extends AbstractCrudController
     {
         yield DateField::new('created_at');
         yield AssociationField::new('employee');
+        yield AssociationField::new('salary_type');
     }
 
 }
