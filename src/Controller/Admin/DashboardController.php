@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Company;
+use App\Entity\Contract;
 use App\Entity\Employees;
 use App\Entity\MoneyMove;
 use App\Entity\MoneyMoveType;
@@ -37,7 +38,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Employees', 'fas fa-list', Employees::class);
         yield MenuItem::linkToCrud('Money', 'fas fa-list', MoneyMove::class);
         yield MenuItem::linkToCrud('Salary', 'fas fa-list', Salary::class);
-//        yield MenuItem::linkToCrud('MoneyMoveType', 'fas fa-list', MoneyMoveType::class);
+        yield MenuItem::linkToCrud('Contract', 'fas fa-list', Contract::class);
         yield MenuItem::linkToCrud('Purpose', 'fas fa-list', Purpose::class);
     }
 }
