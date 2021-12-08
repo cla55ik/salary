@@ -3,11 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contract;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -32,7 +28,8 @@ class ContractCrudController extends AbstractCrudController
         yield TextField::new('address')
             ->onlyOnForms();
         yield DateField::new('created_at');
-        yield DateField::new('deadline_at');
+        yield DateField::new('deadline_at')
+            ->onlyOnIndex();
         yield NumberField::new('period')
             ->onlyOnForms();
         yield NumberField::new('pruduct_sum')
