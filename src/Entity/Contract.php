@@ -55,7 +55,7 @@ class Contract
     /**
      * @ORM\Column(type="float")
      */
-    private $pruduct_sum;
+    private $product_sum;
 
     /**
      * @ORM\Column(type="float")
@@ -96,6 +96,36 @@ class Contract
      * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="contracts")
      */
     private $worker_employee;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $sum;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cost_product;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cost_additional;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cost_another;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cost_all;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $earning;
 
     public function getId(): ?int
     {
@@ -186,14 +216,14 @@ class Contract
         return $this;
     }
 
-    public function getPruductSum(): ?float
+    public function getProductSum(): ?float
     {
-        return $this->pruduct_sum;
+        return $this->product_sum;
     }
 
-    public function setPruductSum(float $pruduct_sum): self
+    public function setProductSum(float $product_sum): self
     {
-        $this->pruduct_sum = $pruduct_sum;
+        $this->product_sum = $product_sum;
 
         return $this;
     }
@@ -290,6 +320,78 @@ class Contract
     public function setWorkerEmployee(?Employees $worker_employee): self
     {
         $this->worker_employee = $worker_employee;
+
+        return $this;
+    }
+
+    public function getSum(): ?float
+    {
+        return $this->sum;
+    }
+
+    public function setSum(float $sum): self
+    {
+        $this->sum = $sum;
+
+        return $this;
+    }
+
+    public function getCostProduct(): ?float
+    {
+        return $this->cost_product;
+    }
+
+    public function setCostProduct(?float $cost_product): self
+    {
+        $this->cost_product = $cost_product;
+
+        return $this;
+    }
+
+    public function getCostAdditional(): ?float
+    {
+        return $this->cost_additional;
+    }
+
+    public function setCostAdditional(?float $cost_additional): self
+    {
+        $this->cost_additional = $cost_additional;
+
+        return $this;
+    }
+
+    public function getCostAnother(): ?float
+    {
+        return $this->cost_another;
+    }
+
+    public function setCostAnother(?float $cost_another): self
+    {
+        $this->cost_another = $cost_another;
+
+        return $this;
+    }
+
+    public function getCostAll(): ?float
+    {
+        return $this->cost_all;
+    }
+
+    public function setCostAll(?float $cost_all): self
+    {
+        $this->cost_all = $cost_all;
+
+        return $this;
+    }
+
+    public function getEarning(): ?float
+    {
+        return $this->earning;
+    }
+
+    public function setEarning(?float $earning): self
+    {
+        $this->earning = $earning;
 
         return $this;
     }

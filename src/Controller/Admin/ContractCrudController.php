@@ -32,12 +32,15 @@ class ContractCrudController extends AbstractCrudController
             ->onlyOnIndex();
         yield NumberField::new('period')
             ->onlyOnForms();
-        yield NumberField::new('pruduct_sum')
+        yield NumberField::new('product_sum')
             ->setLabel('prod sum')
             ->onlyOnForms();
         yield NumberField::new('additional_sum')
             ->setLabel('add sum')
             ->onlyOnForms();
+        yield NumberField::new('sum')
+            ->onlyOnIndex()
+            ->setLabel('SUM');
         yield NumberField::new('product_work_sum')
             ->setLabel('prod w sum');
         yield NumberField::new('additional_work_sum')
