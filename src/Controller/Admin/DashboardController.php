@@ -9,6 +9,7 @@ use App\Entity\MoneyMove;
 use App\Entity\MoneyMoveType;
 use App\Entity\Purpose;
 use App\Entity\Salary;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -40,5 +41,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Salary', 'fas fa-list', Salary::class);
         yield MenuItem::linkToCrud('Contract', 'fas fa-list', Contract::class);
         yield MenuItem::linkToCrud('Purpose', 'fas fa-list', Purpose::class);
+    }
+
+    public function configureCrud(): Crud
+    {
+        return  Crud::new()
+            ->setPaginatorPageSize(30);
     }
 }
