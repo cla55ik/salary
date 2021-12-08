@@ -26,6 +26,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
+
         $period = (int)$entity->getPeriod() + 2;
         $createdAt = $entity->getCreatedAt();
         $tmpDate = clone $createdAt;
