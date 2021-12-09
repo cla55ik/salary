@@ -4,6 +4,7 @@ namespace App\Controller\Main;
 
 
 use App\Entity\Contract;
+use App\Form\ContractFormType;
 use App\Repository\ContractRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,8 +46,11 @@ class ContractController extends AbstractController
      */
     public function edit(Contract $contract):Response
     {
+        $form = $this->createForm(ContractFormType::class);
+
         return $this->render('Main/contract/edit.html.twig',[
-            'contract'=> $contract
+            'contract'=> $contract,
+            'contract_form' => $form->createView()
         ]);
     }
 
@@ -58,7 +62,8 @@ class ContractController extends AbstractController
     public function show(Contract $contract):Response
     {
         return $this->render('Main/contract/show.html.twig', [
-           'contract'=>$contract
+           'contract'=>$contract,
+
         ]);
     }
 }
