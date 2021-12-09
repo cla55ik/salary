@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211209112457 extends AbstractMigration
+final class Version20211209113558 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -31,11 +31,11 @@ final class Version20211209112457 extends AbstractMigration
         $this->addSql('CREATE TABLE purpose (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE salary_type (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE contract ADD CONSTRAINT FK_E98F2859458BED9B FOREIGN KEY (worker_employee_id) REFERENCES employees (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE money_move ADD purose_id INT NOT NULL');
+        $this->addSql('ALTER TABLE money_move ADD purpose_id INT NOT NULL');
         $this->addSql('ALTER TABLE money_move ADD money_move_type_id INT NOT NULL');
-        $this->addSql('ALTER TABLE money_move ADD CONSTRAINT FK_B2947F5BC5B50E FOREIGN KEY (purose_id) REFERENCES purpose (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE money_move ADD CONSTRAINT FK_B2947F7FC21131 FOREIGN KEY (purpose_id) REFERENCES purpose (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE money_move ADD CONSTRAINT FK_B2947F88F10E83 FOREIGN KEY (money_move_type_id) REFERENCES money_move_type (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('CREATE INDEX IDX_B2947F5BC5B50E ON money_move (purose_id)');
+        $this->addSql('CREATE INDEX IDX_B2947F7FC21131 ON money_move (purpose_id)');
         $this->addSql('CREATE INDEX IDX_B2947F88F10E83 ON money_move (money_move_type_id)');
         $this->addSql('ALTER TABLE salary ADD employee_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE salary ADD salary_type_id INT DEFAULT NULL');
@@ -50,7 +50,7 @@ final class Version20211209112457 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE money_move DROP CONSTRAINT FK_B2947F88F10E83');
-        $this->addSql('ALTER TABLE money_move DROP CONSTRAINT FK_B2947F5BC5B50E');
+        $this->addSql('ALTER TABLE money_move DROP CONSTRAINT FK_B2947F7FC21131');
         $this->addSql('ALTER TABLE salary DROP CONSTRAINT FK_9413BB715248165F');
         $this->addSql('DROP SEQUENCE contract_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE money_move_type_id_seq CASCADE');
@@ -60,9 +60,9 @@ final class Version20211209112457 extends AbstractMigration
         $this->addSql('DROP TABLE money_move_type');
         $this->addSql('DROP TABLE purpose');
         $this->addSql('DROP TABLE salary_type');
-        $this->addSql('DROP INDEX IDX_B2947F5BC5B50E');
+        $this->addSql('DROP INDEX IDX_B2947F7FC21131');
         $this->addSql('DROP INDEX IDX_B2947F88F10E83');
-        $this->addSql('ALTER TABLE money_move DROP purose_id');
+        $this->addSql('ALTER TABLE money_move DROP purpose_id');
         $this->addSql('ALTER TABLE money_move DROP money_move_type_id');
         $this->addSql('ALTER TABLE salary DROP CONSTRAINT FK_9413BB718C03F15C');
         $this->addSql('DROP INDEX IDX_9413BB718C03F15C');
