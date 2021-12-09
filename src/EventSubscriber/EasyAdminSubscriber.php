@@ -61,7 +61,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
-        dd($entity);
+//        dd($entity);
 
 //        $contractService->recalculateContract($entity);
 

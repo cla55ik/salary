@@ -30,6 +30,16 @@ class SalaryType
      */
     private ?string $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Salary::class, mappedBy="salary_type")
+     */
+    private $salaries;
+
+    public function __construct()
+    {
+        $this->salaries = new ArrayCollection();
+    }
+
 
 
     public function __toString():string
@@ -50,6 +60,36 @@ class SalaryType
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Salary[]
+     */
+    public function getSalaries(): Collection
+    {
+        return $this->salaries;
+    }
+
+    public function addSalary(Salary $salary): self
+    {
+        if (!$this->salaries->contains($salary)) {
+            $this->salaries[] = $salary;
+            $salary->setSalaryType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalary(Salary $salary): self
+    {
+        if ($this->salaries->removeElement($salary)) {
+            // set the owning side to null (unless already changed)
+            if ($salary->getSalaryType() === $this) {
+                $salary->setSalaryType(null);
+            }
+        }
 
         return $this;
     }

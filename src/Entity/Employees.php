@@ -35,9 +35,15 @@ class Employees
      */
     private $contracts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Salary::class, mappedBy="employee")
+     */
+    private $salaries;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
+        $this->salaries = new ArrayCollection();
     }
 
 
@@ -100,6 +106,36 @@ class Employees
             // set the owning side to null (unless already changed)
             if ($contract->getEmployeeWorker() === $this) {
                 $contract->setEmployeeWorker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Salary[]
+     */
+    public function getSalaries(): Collection
+    {
+        return $this->salaries;
+    }
+
+    public function addSalary(Salary $salary): self
+    {
+        if (!$this->salaries->contains($salary)) {
+            $this->salaries[] = $salary;
+            $salary->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalary(Salary $salary): self
+    {
+        if ($this->salaries->removeElement($salary)) {
+            // set the owning side to null (unless already changed)
+            if ($salary->getEmployee() === $this) {
+                $salary->setEmployee(null);
             }
         }
 

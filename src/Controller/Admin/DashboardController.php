@@ -9,6 +9,7 @@ use App\Entity\MoneyMove;
 use App\Entity\MoneyMoveType;
 use App\Entity\Purpose;
 use App\Entity\Salary;
+use App\Entity\SalaryType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

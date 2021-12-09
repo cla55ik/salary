@@ -19,8 +19,8 @@ class SalaryCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield DateField::new('created_at');
-//        yield AssociationField::new('employee');
-//        yield AssociationField::new('salary_type');
+        yield AssociationField::new('employee');
+        yield AssociationField::new('salary_type');
     }
 
 }
