@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,8 +27,12 @@ class ContractFormType extends AbstractType
             ->add('contract_num', NumberType::class)
             ->add('customer',TextType::class)
             ->add('address', TextType::class)
-            ->add('created_at', DateType::class)
-            ->add('deadline_at', DateType::class)
+            ->add('created_at', DateType::class,[
+                'widget' => 'single_text'
+            ])
+            ->add('deadline_at', DateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('period', NumberType::class)
             ->add('product_sum', NumberType::class)
             ->add('additional_sum', NumberType::class)
@@ -54,6 +59,7 @@ class ContractFormType extends AbstractType
                 'choice_label'=>'name',
                 'attr'=>['data-select'=>'true','class'=>'register-form-select']
             ])
+            ->add('submit', SubmitType::class);
         ;
     }
 
