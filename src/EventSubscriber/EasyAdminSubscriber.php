@@ -52,17 +52,16 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     /**
      * @param BeforeEntityUpdatedEvent $event
-     * @param RecalculateContractService $contractService
      * @return void
      */
-    public function beforeEntityUpdate(BeforeEntityUpdatedEvent $event, RecalculateContractService $contractService)
+    public function beforeEntityUpdate(BeforeEntityUpdatedEvent $event)
     {
         $entity = $event->getEntityInstance();
 
         if (!$entity instanceof Contract){
             return;
         }
-//        dd($entity);
+        dd($entity);
 
 //        $contractService->recalculateContract($entity);
 
