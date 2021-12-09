@@ -23,17 +23,17 @@ class SalaryType
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Salary::class, mappedBy="salary_type")
      */
-    private $salaries;
+    private ArrayCollection $salaries;
 
     public function __construct()
     {
@@ -63,7 +63,7 @@ class SalaryType
     }
 
     /**
-     * @return Collection|Salary[]
+     * @return Collection
      */
     public function getSalaries(): Collection
     {

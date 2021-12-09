@@ -6,6 +6,7 @@ use App\Repository\EmployeesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=EmployeesRepository::class)
@@ -17,35 +18,35 @@ class Employees
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_active;
+    private ?bool $is_active;
 
     /**
      * @ORM\OneToMany(targetEntity=Salary::class, mappedBy="employee")
      */
-    private $salaries;
+    private ArrayCollection $salaries;
 
     /**
      * @ORM\OneToMany(targetEntity=Contract::class, mappedBy="worker_employee")
      */
-    private $contracts;
+    private ArrayCollection $contracts;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->salaries = new ArrayCollection();
         $this->contracts = new ArrayCollection();
     }
 
-    public function __toString():string
+    #[Pure] public function __toString():string
     {
         return $this->getName();
     }
@@ -80,7 +81,7 @@ class Employees
     }
 
     /**
-     * @return Collection|Salary[]
+     * @return Collection
      */
     public function getSalaries(): Collection
     {
@@ -110,7 +111,7 @@ class Employees
     }
 
     /**
-     * @return Collection|Contract[]
+     * @return Collection
      */
     public function getContracts(): Collection
     {

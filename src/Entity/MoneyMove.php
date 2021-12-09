@@ -15,33 +15,33 @@ class MoneyMove
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $sum;
+    private ?float $sum;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private ?\DateTimeInterface $created_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="moneyMoves")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $pay_owner;
+    private ?Company $pay_owner;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="moneyMoves")
      */
-    private $pay_recipient;
+    private ?Company $pay_recipient;
 
     /**
      * @ORM\ManyToOne(targetEntity=Salary::class, inversedBy="money_move")
      */
-    private $salary;
+    private ?Salary $salary;
 
 
 
@@ -49,14 +49,14 @@ class MoneyMove
      * @ORM\ManyToOne(targetEntity=Purpose::class, inversedBy="moneyMoves")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $purose;
+    private ?Purpose $purpose;
 
 
     /**
      * @ORM\ManyToOne(targetEntity=MoneyMoveType::class, inversedBy="moneyMove")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $money_move_type;
+    private ?MoneyMoveType $money_move_type;
 
     public function getId(): ?int
     {
@@ -124,14 +124,14 @@ class MoneyMove
     }
 
 
-    public function getPurose(): ?Purpose
+    public function getPurpose(): ?Purpose
     {
-        return $this->purose;
+        return $this->purpose;
     }
 
-    public function setPurose(?Purpose $purose): self
+    public function setPurpose(?Purpose $purpose): self
     {
-        $this->purose = $purose;
+        $this->purpose = $purpose;
 
         return $this;
     }
@@ -149,4 +149,6 @@ class MoneyMove
 
         return $this;
     }
+
+
 }

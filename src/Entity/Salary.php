@@ -17,27 +17,27 @@ class Salary
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private ?\DateTimeInterface $created_at;
 
     /**
      * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="salary")
      */
-    private $money_move;
+    private ArrayCollection $money_move;
 
     /**
      * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="salaries")
      */
-    private $employee;
+    private ?Employees $employee;
 
     /**
      * @ORM\ManyToOne(targetEntity=SalaryType::class, inversedBy="salaries")
      */
-    private $salary_type;
+    private ?SalaryType $salary_type;
 
     public function __construct()
     {
@@ -63,7 +63,7 @@ class Salary
     }
 
     /**
-     * @return Collection|MoneyMove[]
+     * @return Collection
      */
     public function getMoneyMove(): Collection
     {

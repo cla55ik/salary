@@ -6,9 +6,10 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
- * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository", repositoryClass=CompanyRepository::class)
  */
 class Company
 {
@@ -17,24 +18,24 @@ class Company
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="pay_owner")
      */
-    private $moneyMoves;
+    private ArrayCollection $moneyMoves;
 
     public function __construct()
     {
         $this->moneyMoves = new ArrayCollection();
     }
 
-    public function __toString():string
+    #[Pure] public function __toString():string
     {
         return $this->getName();
     }
@@ -57,7 +58,7 @@ class Company
     }
 
     /**
-     * @return Collection|MoneyMove[]
+     * @return Collection
      */
     public function getMoneyMoves(): Collection
     {

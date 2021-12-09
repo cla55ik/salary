@@ -25,7 +25,7 @@ class Purpose
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="purose")
+     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="purpose")
      */
     private $moneyMoves;
 
@@ -68,7 +68,7 @@ class Purpose
     {
         if (!$this->moneyMoves->contains($moneyMove)) {
             $this->moneyMoves[] = $moneyMove;
-            $moneyMove->setPurose($this);
+            $moneyMove->setPurpose($this);
         }
 
         return $this;
@@ -78,8 +78,8 @@ class Purpose
     {
         if ($this->moneyMoves->removeElement($moneyMove)) {
             // set the owning side to null (unless already changed)
-            if ($moneyMove->getPurose() === $this) {
-                $moneyMove->setPurose(null);
+            if ($moneyMove->getPurpose() === $this) {
+                $moneyMove->setPurpose(null);
             }
         }
 

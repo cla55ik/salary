@@ -6,9 +6,10 @@ use App\Repository\MoneyMoveTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
- * @ORM\Entity(repositoryClass=MoneyMoveTypeRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\MoneyMoveTypeRepository", repositoryClass=MoneyMoveTypeRepository::class)
  */
 class MoneyMoveType
 {
@@ -17,26 +18,21 @@ class MoneyMoveType
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
+    private ?string $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="move_type")
-     */
-    private $moneyMoves;
 
     /**
      * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="money_move_type", orphanRemoval=true)
      */
-    private $moneyMove;
+    private ArrayCollection $moneyMove;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
-        $this->moneyMoves = new ArrayCollection();
         $this->moneyMove = new ArrayCollection();
     }
 
@@ -62,13 +58,6 @@ class MoneyMoveType
         return $this;
     }
 
-    /**
-     * @return Collection|MoneyMove[]
-     */
-    public function getMoneyMoves(): Collection
-    {
-        return $this->moneyMoves;
-    }
 
     public function addMoneyMove(MoneyMove $moneyMove): self
     {
@@ -93,7 +82,7 @@ class MoneyMoveType
     }
 
     /**
-     * @return Collection|MoneyMove[]
+     * @return Collection
      */
     public function getMoneyMove(): Collection
     {
