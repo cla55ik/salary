@@ -24,15 +24,6 @@ class Purpose
      */
     private $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="purpose")
-     */
-    private $moneyMoves;
-
-    public function __construct()
-    {
-        $this->moneyMoves = new ArrayCollection();
-    }
 
     public function __toString():string
     {
@@ -56,33 +47,5 @@ class Purpose
         return $this;
     }
 
-    /**
-     * @return Collection|MoneyMove[]
-     */
-    public function getMoneyMoves(): Collection
-    {
-        return $this->moneyMoves;
-    }
 
-    public function addMoneyMove(MoneyMove $moneyMove): self
-    {
-        if (!$this->moneyMoves->contains($moneyMove)) {
-            $this->moneyMoves[] = $moneyMove;
-            $moneyMove->setPurpose($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMoneyMove(MoneyMove $moneyMove): self
-    {
-        if ($this->moneyMoves->removeElement($moneyMove)) {
-            // set the owning side to null (unless already changed)
-            if ($moneyMove->getPurpose() === $this) {
-                $moneyMove->setPurpose(null);
-            }
-        }
-
-        return $this;
-    }
 }

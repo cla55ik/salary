@@ -25,15 +25,6 @@ class Company
      */
     private ?string $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="pay_owner")
-     */
-    private ArrayCollection $moneyMoves;
-
-    public function __construct()
-    {
-        $this->moneyMoves = new ArrayCollection();
-    }
 
     #[Pure] public function __toString():string
     {
@@ -57,33 +48,6 @@ class Company
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
-    public function getMoneyMoves(): Collection
-    {
-        return $this->moneyMoves;
-    }
 
-    public function addMoneyMove(MoneyMove $moneyMove): self
-    {
-        if (!$this->moneyMoves->contains($moneyMove)) {
-            $this->moneyMoves[] = $moneyMove;
-            $moneyMove->setPayOwner($this);
-        }
 
-        return $this;
-    }
-
-    public function removeMoneyMove(MoneyMove $moneyMove): self
-    {
-        if ($this->moneyMoves->removeElement($moneyMove)) {
-            // set the owning side to null (unless already changed)
-            if ($moneyMove->getPayOwner() === $this) {
-                $moneyMove->setPayOwner(null);
-            }
-        }
-
-        return $this;
-    }
 }

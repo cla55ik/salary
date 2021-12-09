@@ -92,10 +92,6 @@ class Contract
      */
     private ?float $slopes_width;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="contracts")
-     */
-    private ?Employees $worker_employee;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -308,18 +304,6 @@ class Contract
     public function setSlopesWidth(?float $slopes_width): self
     {
         $this->slopes_width = $slopes_width;
-
-        return $this;
-    }
-
-    public function getWorkerEmployee(): ?Employees
-    {
-        return $this->worker_employee;
-    }
-
-    public function setWorkerEmployee(?Employees $worker_employee): self
-    {
-        $this->worker_employee = $worker_employee;
 
         return $this;
     }

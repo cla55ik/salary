@@ -26,16 +26,6 @@ class MoneyMoveType
     private ?string $name;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="money_move_type", orphanRemoval=true)
-     */
-    private ArrayCollection $moneyMove;
-
-    #[Pure] public function __construct()
-    {
-        $this->moneyMove = new ArrayCollection();
-    }
-
     public function __toString():string
     {
        return $this->getName();
@@ -59,33 +49,4 @@ class MoneyMoveType
     }
 
 
-    public function addMoneyMove(MoneyMove $moneyMove): self
-    {
-        if (!$this->moneyMoves->contains($moneyMove)) {
-            $this->moneyMoves[] = $moneyMove;
-            $moneyMove->setMoveType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMoneyMove(MoneyMove $moneyMove): self
-    {
-        if ($this->moneyMoves->removeElement($moneyMove)) {
-            // set the owning side to null (unless already changed)
-            if ($moneyMove->getMoveType() === $this) {
-                $moneyMove->setMoveType(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getMoneyMove(): Collection
-    {
-        return $this->moneyMove;
-    }
 }
