@@ -44,6 +44,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $tmpDate->modify("+{$period} day");
         $entity->setDeadlineAt($tmpDate);
 
+//        dd($entity);
+
         //Add cost_all and sum_all
 
     }
@@ -60,14 +62,15 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
+//        dd($entity);
 
-        $contractService->recalculateContract($entity);
+//        $contractService->recalculateContract($entity);
 
-//        $cost_all = $entity->getCostProduct()+$entity->getCostAdditional()+$entity->getCostAnother();
-//        $entity->setCostAll($cost_all);
-//
-//        $sum_all = $entity->getProductSum()+$entity->getAdditionalSum()+$entity->getAdditionalSum()+$entity->getProductWorkSum()+$entity->getAdditionalSum();
-//        $entity->setSum($sum_all);
+        $cost_all = $entity->getCostProduct()+$entity->getCostAdditional()+$entity->getCostAnother();
+        $entity->setCostAll($cost_all);
+
+        $sum_all = $entity->getProductSum()+$entity->getAdditionalSum()+$entity->getAdditionalSum()+$entity->getProductWorkSum()+$entity->getAdditionalSum();
+        $entity->setSum($sum_all);
 
     }
 }
