@@ -123,6 +123,11 @@ class Contract
      */
     private ?float $earning;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="contracts")
+     */
+    private $employee_worker;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -376,6 +381,18 @@ class Contract
     public function setEarning(?float $earning): self
     {
         $this->earning = $earning;
+
+        return $this;
+    }
+
+    public function getEmployeeWorker(): ?Employees
+    {
+        return $this->employee_worker;
+    }
+
+    public function setEmployeeWorker(?Employees $employee_worker): self
+    {
+        $this->employee_worker = $employee_worker;
 
         return $this;
     }

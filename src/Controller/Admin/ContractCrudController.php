@@ -53,8 +53,8 @@ class ContractCrudController extends AbstractCrudController
             ->setLabel('slope l');
         yield NumberField::new('slopes_width')
             ->setLabel('slope w');
-//        yield AssociationField::new('worker_employee')
-//            ->setLabel('worker');
+        yield AssociationField::new('employee_worker')
+            ->setLabel('worker');
         yield BooleanField::new('is_done');
 
     }
@@ -63,7 +63,7 @@ class ContractCrudController extends AbstractCrudController
     {
         return $filters
             ->add(BooleanFilter::new('is_done'))
-//            ->add('worker_employee')
+            ->add('employee_worker')
             ;
 
     }

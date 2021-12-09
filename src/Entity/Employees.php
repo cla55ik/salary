@@ -30,6 +30,16 @@ class Employees
      */
     private ?bool $is_active;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Contract::class, mappedBy="employee_worker")
+     */
+    private $contracts;
+
+    public function __construct()
+    {
+        $this->contracts = new ArrayCollection();
+    }
+
 
 
     #[Pure] public function __toString():string
@@ -62,6 +72,36 @@ class Employees
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contract[]
+     */
+    public function getContracts(): Collection
+    {
+        return $this->contracts;
+    }
+
+    public function addContract(Contract $contract): self
+    {
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts[] = $contract;
+            $contract->setEmployeeWorker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContract(Contract $contract): self
+    {
+        if ($this->contracts->removeElement($contract)) {
+            // set the owning side to null (unless already changed)
+            if ($contract->getEmployeeWorker() === $this) {
+                $contract->setEmployeeWorker(null);
+            }
+        }
 
         return $this;
     }
