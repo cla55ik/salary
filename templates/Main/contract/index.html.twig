@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contracts{% endblock %}
+
+{% block body %}
+    <table>
+        <th>
+            <td>Num</td>
+            <td>createdAt</td>
+            <td>deadline</td>
+            <td>Customer</td>
+            <td>Sum</td>
+            <td>Cost</td>
+            <td>Worker</td>
+            <td>Status</td>
+            <td>Edit</td>
+        </th>
+    {% for contract in contracts %}
+        <tr>
+            <td>{{ contract.contractNum }}</td>
+            <td>{{ contract.createdAt.format("Y.m.d") }}</td>
+            <td>{{ contract.deadlineAt.format("Y.m.d") }}</td>
+            <td>{{ contract.customer }}</td>
+            <td>{{ contract.sum }}</td>
+            <td>{{ contract.costAll }}</td>
+            <td>{{ contract.workerEmployee }}</td>
+            <td>{{ contract.isDone }}</td>
+            <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
+            <td><a href="{{ path('contract_show', {id:contract.id}) }}">show</a></td>
+        </tr>
+
+
+    {% endfor %}
+    </table>
+
+{% endblock %}

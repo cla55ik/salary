@@ -15,117 +15,117 @@ class Contract
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_done;
+    private ?bool $is_done;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $contract_num;
+    private ?string $contract_num;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $customer;
+    private ?string $customer;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $address;
+    private ?string $address;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private ?\DateTimeInterface $created_at;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $deadline_at;
+    private ?\DateTimeInterface $deadline_at;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $period;
+    private ?int $period;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $product_sum;
+    private ?float $product_sum;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $additional_sum;
+    private ?float $additional_sum;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $product_work_sum;
+    private ?float $product_work_sum;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $additional_work_sum;
+    private ?float $additional_work_sum;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $product_area;
+    private ?float $product_area;
 
     /**
      * @ORM\Column(type="integer", nullable=true, unique=true)
      */
-    private $product_num;
+    private ?int $product_num;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $slopes_length;
+    private ?float $slopes_length;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $slopes_width;
+    private ?float $slopes_width;
 
     /**
      * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="contracts")
      */
-    private $worker_employee;
+    private ?Employees $worker_employee;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $sum;
+    private ?float $sum;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $cost_product;
+    private ?float $cost_product;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $cost_additional;
+    private ?float $cost_additional;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $cost_another;
+    private ?float $cost_another;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $cost_all;
+    private ?float $cost_all;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $earning;
+    private ?float $earning;
 
     public function getId(): ?int
     {

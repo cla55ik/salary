@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit contract{% endblock %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a>
+    </div>
+    <div>
+        <div>
+            {{ contract.contractNum }}
+        </div>
+    </div>
+
+{% endblock %}
