@@ -27,3 +27,4 @@ services:
     App\EntityListener\ContractEntityListener:
         tags:
             - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'App\Entity\Contract' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'App\Entity\Contract' }

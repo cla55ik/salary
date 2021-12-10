@@ -128,6 +128,11 @@ class Contract
      */
     private $employee_worker;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $sum_slope_work;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -393,6 +398,18 @@ class Contract
     public function setEmployeeWorker(?Employees $employee_worker): self
     {
         $this->employee_worker = $employee_worker;
+
+        return $this;
+    }
+
+    public function getSumSlopeWork(): ?float
+    {
+        return $this->sum_slope_work;
+    }
+
+    public function setSumSlopeWork(?float $sum_slope_work): self
+    {
+        $this->sum_slope_work = $sum_slope_work;
 
         return $this;
     }
