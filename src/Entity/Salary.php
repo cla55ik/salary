@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SalaryRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Salary
 {
@@ -27,12 +28,26 @@ class Salary
     /**
      * @ORM\ManyToOne(targetEntity=SalaryType::class, inversedBy="salaries")
      */
-    private $salary_type;
+    private ?SalaryType $salary_type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="salaries")
      */
-    private $employee;
+    private ?Employees $employee;
+
+    /**
+     * @ORM\Column (type="float")
+     */
+    private ?float $sum;
+
+    /**
+     * @ORM\PrePersist()
+     * @return void
+     */
+    public function setCreatedAtValue():void
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
 
 
     public function getId(): ?int
@@ -76,5 +91,20 @@ class Salary
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
+    public function getSum(): ?float
+    {
+        return $this->sum;
+    }
+
+    /**
+     * @param float|null $sum
+     */
+    public function setSum(?float $sum): void
+    {
+        $this->sum = $sum;
+    }
 
 }
