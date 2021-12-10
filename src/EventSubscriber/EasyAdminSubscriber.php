@@ -23,7 +23,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            BeforeEntityPersistedEvent::class => ['setContractDeadlineDate'],
+            BeforeEntityPersistedEvent::class => ['beforeEntityPersist'],
             BeforeEntityUpdatedEvent::class => ['beforeEntityUpdate'],
         ];
     }
@@ -31,7 +31,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     /**
      * @throws Exception
      */
-    public function setContractDeadlineDate(BeforeEntityPersistedEvent $event)
+    public function beforeEntityPersist(BeforeEntityPersistedEvent $event)
     {
         $entity = $event->getEntityInstance();
         if (!$entity instanceof Contract){
@@ -61,9 +61,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
-//        dd($entity);
-
-//        $contractService->recalculateContract($entity);
 
         $cost_all = $entity->getCostProduct()+$entity->getCostAdditional()+$entity->getCostAnother();
         $entity->setCostAll($cost_all);
