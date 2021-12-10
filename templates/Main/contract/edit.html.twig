@@ -3,6 +3,10 @@
 {% block title %}Edit contract{% endblock %}
 
 {% block body %}
+    <div class="container">
+        <h3>edit contract {{ contract.contractNum }}</h3>
+        {{ form(contract_form) }}
+    </div>
 
-    {{ form(contract_form) }}
+
 {% endblock %}

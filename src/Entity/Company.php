@@ -3,10 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompanyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository", repositoryClass=CompanyRepository::class)
@@ -26,7 +24,7 @@ class Company
     private ?string $name;
 
 
-    #[Pure] public function __toString():string
+    public function __toString():string
     {
         return $this->getName();
     }

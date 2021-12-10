@@ -121,7 +121,8 @@ class ContractEntityListener
      */
     private function recalculateCost(Contract $contract) : void
     {
-        $contract->setCostAll($contract->getCostProduct() + $contract->getCostAdditional() + $contract->getProductWorkSum() + $contract->getAdditionalWorkSum() + $contract->getSumSlopeWork());
+//        dd($contract->getCostProduct(),$contract->getCostAdditional(),$contract->getProductWorkSum(),$contract->getAdditionalWorkSum(),$contract->getSumSlopeWork());
+        $contract->setCostAll($contract->getCostProduct() + $contract->getCostAdditional() + $contract->getProductWorkSum() + $contract->getAdditionalWorkSum() + $contract->getCostAnother() + $contract->getSumSlopeWork());
     }
 
     /**

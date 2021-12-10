@@ -7,10 +7,7 @@ use App\Entity\Employees;
 use App\Repository\EmployeesRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,6 +17,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContractFormType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -28,7 +30,7 @@ class ContractFormType extends AbstractType
             ->add('customer',TextType::class)
             ->add('address', TextType::class)
             ->add('created_at', DateType::class,[
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('deadline_at', DateType::class, [
                 'widget' => 'single_text'
