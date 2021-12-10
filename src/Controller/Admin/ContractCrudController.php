@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
@@ -22,6 +23,16 @@ class ContractCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        yield NumberField::new('sum')
+            ->setDisabled(true)
+        ;
+        yield NumberField::new('cost_all')
+            ->setDisabled(true)
+        ;
+        yield NumberField::new('earning')
+            ->setLabel('profit')
+            ->setDisabled(true)
+        ;
         yield TextField::new('contract_num')
             ->setLabel('№');
         yield TextField::new('customer');
@@ -48,7 +59,7 @@ class ContractCrudController extends AbstractCrudController
         yield NumberField::new('product_area')
             ->setLabel('area');
         yield NumberField::new('product_num')
-            ->setLabel('count');
+            ->setLabel('prod count');
         yield NumberField::new('slopes_length')
             ->setLabel('slope l');
         yield NumberField::new('slopes_width')
@@ -56,7 +67,15 @@ class ContractCrudController extends AbstractCrudController
         yield AssociationField::new('employee_worker')
             ->setLabel('worker');
         yield BooleanField::new('is_done');
-
+        yield NumberField::new('cost_product')
+            ->setLabel('Закупка продукта')
+            ;
+        yield NumberField::new('cost_additional')
+            ->setLabel('Закупка доп')
+            ;
+        yield NumberField::new('cost_another')
+            ->setLabel('прочие затраты')
+            ;
     }
 
     public function configureFilters(Filters $filters): Filters
