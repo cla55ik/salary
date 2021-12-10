@@ -26,6 +26,8 @@ class ContractEntityListener
     {
         $this->setDeadlineDate($contract);
         $this->recalculateWorkSum($contract);
+        $this->recalculateSum($contract);
+        $this->recalculateCost($contract);
     }
 
     /**
@@ -37,6 +39,9 @@ class ContractEntityListener
     {
         $this->setDeadlineDate($contract);
         $this->recalculateWorkSum($contract);
+        $this->recalculateSum($contract);
+        $this->recalculateCost($contract);
+        $this->recalculateEarning($contract);
     }
 
     /**
@@ -74,9 +79,14 @@ class ContractEntityListener
 
         $contract->setProductWorkSum($montage);
         $contract->setSumSlopeWork($slopes);
+    }
 
+    /**
+     * @param Contract $contract
+     * @return void
+     */
+    private function recalculateSum(Contract $contract){
         $contract->setSum($contract->getProductSum() + $contract->getAdditionalSum());
-
     }
 
     /**
@@ -103,8 +113,6 @@ class ContractEntityListener
         }
 
         return 0;
-
-
     }
 
     /**
@@ -113,7 +121,16 @@ class ContractEntityListener
      */
     private function recalculateCost(Contract $contract) : void
     {
-        $cost = $contract->getCostProduct() + $contract->getCostProduct() + $contract->getProductWorkSum() + $contract->getAdditionalWorkSum();
+        $contract->setCostAll($contract->getCostProduct() + $contract->getCostAdditional() + $contract->getProductWorkSum() + $contract->getAdditionalWorkSum() + $contract->getSumSlopeWork());
+    }
+
+    /**
+     * @param Contract $contract
+     * @return void
+     */
+    private function recalculateEarning(Contract $contract):void
+    {
+        $contract->setEarning($contract->getSum() - $contract->getCostAll());
     }
 
 
