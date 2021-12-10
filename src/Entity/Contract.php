@@ -78,7 +78,7 @@ class Contract
     private ?float $product_area;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, unique=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $product_num;
 

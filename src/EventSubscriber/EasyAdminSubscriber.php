@@ -44,11 +44,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
-        $this->recalculateCost($entity);
+        $this->setDeadlineDate($entity);
+//        $this->recalculateCost($entity);
     //create deadline date
-
-
-
     }
 
     /**
@@ -62,10 +60,11 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
+        $this->setProductWorkingSum($entity);
 
         $this->recalculateCost($entity);
-        $this->setDeadlineDate($entity);
-        $this->setProductWorkingSum($entity);
+
+
 
 
     }
