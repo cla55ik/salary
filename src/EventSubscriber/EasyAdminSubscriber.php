@@ -44,7 +44,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Contract){
             return;
         }
-        $this->setDeadlineDate($entity);
+//        $this->setDeadlineDate($entity);
 //        $this->recalculateCost($entity);
     //create deadline date
     }
