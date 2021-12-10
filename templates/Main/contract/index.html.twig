@@ -3,34 +3,38 @@
 {% block title %}Contracts{% endblock %}
 
 {% block body %}
-    <table>
-        <th>
-            <td>Num</td>
-            <td>createdAt</td>
-            <td>deadline</td>
-            <td>Customer</td>
-            <td>Sum</td>
-            <td>Cost</td>
-            <td>Worker</td>
-            <td>Status</td>
-            <td>Edit</td>
-        </th>
-    {% for contract in contracts %}
-        <tr>
-            <td>{{ contract.contractNum }}</td>
-            <td>{{ contract.createdAt.format("Y.m.d") }}</td>
-            <td>{{ contract.deadlineAt.format("Y.m.d") }}</td>
-            <td>{{ contract.customer }}</td>
-            <td>{{ contract.sum }}</td>
-            <td>{{ contract.costAll }}</td>
-            <td>{{ contract.employeeWorker }}</td>
-            <td>{{ contract.isDone }}</td>
-            <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
-            <td><a href="{{ path('contract_show', {id:contract.id}) }}">show</a></td>
-        </tr>
+    <div class="container">
+        <table class="table table-responsive">
+            <tr>
+                <th>Num</th>
+                <th>createdAt</th>
+                <th>deadline</th>
+                <th>Customer</th>
+                <th>Sum</th>
+                <th>Cost</th>
+                <th>Worker</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Show</th>
+            </tr>
+            {% for contract in contracts %}
+                <tr>
+                    <td>{{ contract.contractNum }}</td>
+                    <td>{{ contract.createdAt.format("Y.m.d") }}</td>
+                    <td>{{ contract.deadlineAt.format("Y.m.d") }}</td>
+                    <td>{{ contract.customer }}</td>
+                    <td>{{ contract.sum }}</td>
+                    <td>{{ contract.costAll }}</td>
+                    <td>{{ contract.employeeWorker }}</td>
+                    <td>{{ contract.isDone }}</td>
+                    <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
+                    <td><a href="{{ path('contract_show', {id:contract.id}) }}">show</a></td>
+                </tr>
 
+            {% endfor %}
+        </table>
 
-    {% endfor %}
-    </table>
+    </div>
+
 
 {% endblock %}
