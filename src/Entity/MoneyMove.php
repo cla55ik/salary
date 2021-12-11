@@ -27,6 +27,11 @@ class MoneyMove
      */
     private ?\DateTimeInterface $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MoneyMoveType::class, inversedBy="moneyMoves")
+     */
+    private $money_move_type;
+
 
     public function getId(): ?int
     {
@@ -53,6 +58,18 @@ class MoneyMove
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getMoneyMoveType(): ?MoneyMoveType
+    {
+        return $this->money_move_type;
+    }
+
+    public function setMoneyMoveType(?MoneyMoveType $money_move_type): self
+    {
+        $this->money_move_type = $money_move_type;
 
         return $this;
     }

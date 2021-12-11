@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\EmployeesPost;
 use App\Entity\MoneyMoveType;
 use App\Entity\SalaryType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,12 @@ class TestDataService
     private const MONEY_MOVE_TYPE = [
       'cost',
         'entry'
+    ];
+
+    private const EMPLOYEE_POST = [
+      'manager',
+      'montage',
+      'measuring'
     ];
 
     private EntityManagerInterface $entityManager;
@@ -56,6 +63,20 @@ class TestDataService
             }
         }
 
+    }
+
+    public function createTestEmployeePost()
+    {
+        $employee_post = $this->entityManager->getRepository(EmployeesPost::class);
+
+        foreach ( self::EMPLOYEE_POST as $post_name) {
+            if(!$employee_post->findBy(['post'=>$post_name])){
+                $post = new EmployeesPost();
+                $post->setPost($post_name);
+                $this->entityManager->persist($post);
+                $this->entityManager->flush();
+            }
+        }
     }
 
 }
