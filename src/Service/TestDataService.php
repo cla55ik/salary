@@ -20,9 +20,9 @@ class TestDataService
     }
 
     /**
-     * @return string
+     * @return void
      */
-    public function createTestSalaryType(): string
+    public function createTestSalaryType(): void
     {
         $salary_type_repo = $this->entityManager->getRepository(SalaryType::class);
 
@@ -34,7 +34,7 @@ class TestDataService
                 $this->entityManager->flush();
             }
         }
-        return 'TestSalaryType is Done';
+
     }
 
 
