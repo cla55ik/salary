@@ -40,6 +40,11 @@ class Employees
      */
     private $salaries;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=EmployeesPost::class, inversedBy="employees")
+     */
+    private $employee_post;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -138,6 +143,18 @@ class Employees
                 $salary->setEmployee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmployeePost(): ?EmployeesPost
+    {
+        return $this->employee_post;
+    }
+
+    public function setEmployeePost(?EmployeesPost $employee_post): self
+    {
+        $this->employee_post = $employee_post;
 
         return $this;
     }
