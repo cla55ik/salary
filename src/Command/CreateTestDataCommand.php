@@ -43,6 +43,7 @@ class CreateTestDataCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $this->testDataService->createTestSalaryType();
+        $this->testDataService->createTestMoneyMoveType();
 
         return 0;
 
