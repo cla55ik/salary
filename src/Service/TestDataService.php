@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\Salary;
 use App\Entity\SalaryType;
 use Doctrine\ORM\EntityManagerInterface;
 
