@@ -38,7 +38,7 @@ class ContractFormType extends AbstractType
                 'choice_label'=>'name',
                 'attr'=>['data-selected'=>'true', 'class'=>'register-form-select']
             ])
-            ->add('contract_num', NumberType::class)
+            ->add('contract_num', TextType::class)
             ->add('customer',TextType::class)
 //            ->add('address', TextType::class)
             ->add('created_at', DateType::class,[
