@@ -8,6 +8,7 @@ use App\Entity\SalaryType;
 use App\Service\SalaryService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,14 +45,9 @@ class SalaryController extends AbstractController
         }
 
         if(!$this->salaryService->isSalaryIssetByContract($contract->getId())){
-            $this->addFlash(
-                'notice',
-                'Salary is already exists'
-            );
-            return $this->redirectToRoute('contract');
+
+            return $this->updateSalaryByContract($contract->getId());
         }
-
-
 
         $employee_id = $contract->getEmployeeWorker();
         $sum = $contract->getSumSlopeWork() + $contract->getProductWorkSum()+$contract->getAdditionalWorkSum();
@@ -69,6 +65,30 @@ class SalaryController extends AbstractController
         $this->addFlash(
             'notice',
             'Salary done'
+        );
+
+        return $this->redirectToRoute('contract');
+    }
+
+    /**
+     * @param int $contract_id
+     * @return RedirectResponse
+     */
+    public function updateSalaryByContract(int $contract_id): RedirectResponse
+    {
+        $salary = $this->em->getRepository(Salary::class)->findOneBy(['contract'=>$contract_id]);
+        $salary_type = $this->em->getRepository(SalaryType::class)->find('2');
+//      $contract = $salary->getContract()
+
+        $salary->setSalaryType($salary_type);
+        $salary->setEmployee($salary->getContract()->getEmployeeWorker());
+//        dd($salary);
+        $salary->setSum($salary->getContract()->getSumSlopeWork() + $salary->getContract()->getProductWorkSum() + $salary->getContract()->getAdditionalWorkSum());
+        $this->em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Salary updated'
         );
 
         return $this->redirectToRoute('contract');
