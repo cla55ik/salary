@@ -90,7 +90,7 @@ class TestDataService
 //            dd($post);
 
             for ($i=1; $i<6; $i++){
-                $employee_name = strtoupper($post_name) . $i;
+                $employee_name = ucfirst($post_name) . $i;
                 $employee = new Employees();
                 $employee->setEmployeePost($post);
                 $employee->setName($employee_name);

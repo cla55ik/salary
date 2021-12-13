@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ContractRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ContractRepository", repositoryClass=ContractRepository::class)
  */
 class Contract
 {
@@ -128,17 +128,17 @@ class Contract
     /**
      * @ORM\ManyToOne(targetEntity=Employees::class, inversedBy="contracts")
      */
-    private $employee_worker;
+    private ?Employees $employee_worker;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $sum_slope_work;
+    private ?float $sum_slope_work;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="contracts")
      */
-    private $owner;
+    private ?Company $owner;
 
     /**
      * @ORM\OneToMany(targetEntity=Salary::class, mappedBy="contract")
@@ -148,24 +148,24 @@ class Contract
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $base_sum;
+    private ?float $base_sum;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
-    private $prepayment;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Employees::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $manager;
+    private ?float $prepayment;
 
     /**
      * @ORM\ManyToOne(targetEntity=Employees::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $measuring;
+    private ?Employees $manager;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Employees::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Employees $measuring;
 
     public function __construct()
     {

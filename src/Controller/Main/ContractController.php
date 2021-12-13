@@ -69,7 +69,7 @@ class ContractController extends AbstractController
     }
 
     /**
-     * @Route ("/contract/{id}", name="contract_show")
+     * @Route ("/contract/{id}", name="contract_show", requirements={"id"="\d+"})
      * @param Contract $contract
      * @return Response
      */
@@ -79,5 +79,28 @@ class ContractController extends AbstractController
            'contract'=>$contract,
 
         ]);
+    }
+
+    /**
+     * @Route("/contract/create", name="create_contract")
+     * @param Request $request
+     * @return Response
+     */
+    public function createContract(Request $request):Response
+    {
+        $form = $this->createForm(ContractFormType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $contract = $form->getData();
+            $this->entityManager->persist($contract);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('contract');
+
+        }
+
+        return $this->render('Main/contract/create.html.twig',[
+           'create_form'=>$form->createView()
+        ]);
+
     }
 }
