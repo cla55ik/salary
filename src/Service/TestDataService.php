@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Employees;
 use App\Entity\EmployeesPost;
 use App\Entity\MoneyMoveType;
 use App\Entity\SalaryType;
@@ -24,6 +25,7 @@ class TestDataService
       'montage',
       'measuring'
     ];
+
 
     private EntityManagerInterface $entityManager;
 
@@ -77,6 +79,28 @@ class TestDataService
                 $this->entityManager->flush();
             }
         }
+    }
+
+    public function createTestEmployees()
+    {
+        $employees = $this->entityManager->getRepository(Employees::class);
+        $employee_post = $this->entityManager->getRepository(EmployeesPost::class);
+        foreach (self::EMPLOYEE_POST as $post_name){
+            $post=$employee_post->findOneBy(['post'=>$post_name]);
+//            dd($post);
+
+            for ($i=1; $i<6; $i++){
+                $employee_name = strtoupper($post_name) . $i;
+                $employee = new Employees();
+                $employee->setEmployeePost($post);
+                $employee->setName($employee_name);
+                $employee->setIsActive(true);
+
+                $this->entityManager->persist($employee);
+                $this->entityManager->flush();
+            }
+        }
+
     }
 
 }
