@@ -45,7 +45,7 @@ class MoneyMoveCrudController extends AbstractCrudController
     {
         yield NumberField::new('sum');
         yield DateField::new('created_at');
-//        yield AssociationField::new('money_move_type');
+        yield AssociationField::new('money_move_type');
 //        yield AssociationField::new('purpose');
 //        yield AssociationField::new('pay_owner');
 //        yield AssociationField::new('pay_recipient');

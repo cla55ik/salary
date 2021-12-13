@@ -17,21 +17,26 @@ class EmployeesPost
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $post;
+    private ?string $post;
 
     /**
      * @ORM\OneToMany(targetEntity=Employees::class, mappedBy="employee_post")
      */
-    private $employees;
+    private ArrayCollection $employees;
 
     public function __construct()
     {
         $this->employees = new ArrayCollection();
+    }
+
+    public function __toString():string
+    {
+        return $this->getPost();
     }
 
     public function getId(): ?int
