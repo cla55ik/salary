@@ -150,6 +150,11 @@ class Contract
         $this->salaries = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getContractNum() . ' -> ' . $this->getOwner();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

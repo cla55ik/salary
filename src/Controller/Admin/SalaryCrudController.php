@@ -23,6 +23,7 @@ class SalaryCrudController extends AbstractCrudController
         yield NumberField::new('sum');
         yield AssociationField::new('employee');
         yield AssociationField::new('salary_type');
+        yield AssociationField::new('contract');
 
     }
 
