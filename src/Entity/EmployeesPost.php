@@ -27,13 +27,16 @@ class EmployeesPost
     /**
      * @ORM\OneToMany(targetEntity=Employees::class, mappedBy="employee_post")
      */
-    private ArrayCollection $employees;
+    private $employees;
 
     public function __construct()
     {
         $this->employees = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString():string
     {
         return $this->getPost();
