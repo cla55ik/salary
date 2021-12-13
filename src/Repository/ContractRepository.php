@@ -19,6 +19,24 @@ class ContractRepository extends ServiceEntityRepository
         parent::__construct($registry, Contract::class);
     }
 
+    public function findAllNotDone()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.is_done = false')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findAllIsDone()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.is_done = true')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Contract[] Returns an array of Contract objects
     //  */

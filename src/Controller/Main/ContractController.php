@@ -28,16 +28,30 @@ class ContractController extends AbstractController
 
     /**
      * @param ContractRepository $contractRepository
+     * @param Request $request
      * @return Response
-     * @Route("/contract", name="contract")
+     * @Route("/contract", name="contract", methods={"GET"})
      */
-    public function index(ContractRepository $contractRepository):Response
+    public function index(ContractRepository $contractRepository, Request $request):Response
     {
-//        dd($contractRepository->findAll());
+        if($request->get('status') == 'is_done'){
+            return $this->render('Main/contract/index.html.twig', [
+               'contracts' => $contractRepository->findAllIsDone()
+            ]);
+        }
+
+        if($request->get('status') == 'not_done'){
+            return $this->render('Main/contract/index.html.twig', [
+               'contracts' => $contractRepository->findAllNotDone()
+            ]);
+        }
+
         return $this->render('Main/contract/index.html.twig', [
             'contracts' => $contractRepository->findAll()
         ]);
+
     }
+
 
     /**
      * @Route ("/contract/edit/{id}", name="contract_edit")
