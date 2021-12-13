@@ -41,6 +41,16 @@ class Salary
     private ?float $sum;
 
     /**
+     * @ORM\OneToMany(targetEntity=MoneyMove::class, mappedBy="salary")
+     */
+    private $money_move;
+
+    public function __construct()
+    {
+        $this->money_move = new ArrayCollection();
+    }
+
+    /**
      * @ORM\PrePersist()
      * @return void
      */
@@ -105,6 +115,36 @@ class Salary
     public function setSum(?float $sum): void
     {
         $this->sum = $sum;
+    }
+
+    /**
+     * @return Collection|MoneyMove[]
+     */
+    public function getMoneyMove(): Collection
+    {
+        return $this->money_move;
+    }
+
+    public function addMoneyMove(MoneyMove $moneyMove): self
+    {
+        if (!$this->money_move->contains($moneyMove)) {
+            $this->money_move[] = $moneyMove;
+            $moneyMove->setSalary($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMoneyMove(MoneyMove $moneyMove): self
+    {
+        if ($this->money_move->removeElement($moneyMove)) {
+            // set the owning side to null (unless already changed)
+            if ($moneyMove->getSalary() === $this) {
+                $moneyMove->setSalary(null);
+            }
+        }
+
+        return $this;
     }
 
 }

@@ -32,6 +32,11 @@ class MoneyMove
      */
     private $money_move_type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Salary::class, inversedBy="money_move")
+     */
+    private $salary;
+
 
     public function getId(): ?int
     {
@@ -70,6 +75,18 @@ class MoneyMove
     public function setMoneyMoveType(?MoneyMoveType $money_move_type): self
     {
         $this->money_move_type = $money_move_type;
+
+        return $this;
+    }
+
+    public function getSalary(): ?Salary
+    {
+        return $this->salary;
+    }
+
+    public function setSalary(?Salary $salary): self
+    {
+        $this->salary = $salary;
 
         return $this;
     }
