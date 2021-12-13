@@ -133,6 +133,11 @@ class Contract
      */
     private $sum_slope_work;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="contracts")
+     */
+    private $owner;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -410,6 +415,18 @@ class Contract
     public function setSumSlopeWork(?float $sum_slope_work): self
     {
         $this->sum_slope_work = $sum_slope_work;
+
+        return $this;
+    }
+
+    public function getOwner(): ?Company
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Company $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

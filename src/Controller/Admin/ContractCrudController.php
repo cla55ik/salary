@@ -3,15 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contract;
-use App\Entity\EmployeesPost;
-use App\Repository\EmployeesRepository;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
@@ -36,6 +33,7 @@ class ContractCrudController extends AbstractCrudController
             ->setLabel('profit')
             ->setDisabled(true)
         ;
+        yield AssociationField::new('owner');
         yield TextField::new('contract_num')
             ->setLabel('№');
         yield TextField::new('customer');
