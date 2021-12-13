@@ -37,6 +37,16 @@ class MoneyMove
      */
     private $salary;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class)
+     */
+    private $money_owner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class)
+     */
+    private $money_payer;
+
 
     public function getId(): ?int
     {
@@ -87,6 +97,30 @@ class MoneyMove
     public function setSalary(?Salary $salary): self
     {
         $this->salary = $salary;
+
+        return $this;
+    }
+
+    public function getMoneyOwner(): ?Company
+    {
+        return $this->money_owner;
+    }
+
+    public function setMoneyOwner(?Company $money_owner): self
+    {
+        $this->money_owner = $money_owner;
+
+        return $this;
+    }
+
+    public function getMoneyPayer(): ?Company
+    {
+        return $this->money_payer;
+    }
+
+    public function setMoneyPayer(?Company $money_payer): self
+    {
+        $this->money_payer = $money_payer;
 
         return $this;
     }
