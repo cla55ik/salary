@@ -28,9 +28,12 @@
                 <th>Slopes Work</th>
                 <th>Add Work</th>
                 <th>FixSalary</th>
+                <th>Edit</th>
             </tr>
             {% for contract in contracts %}
-                <tr>
+                {% if contract.isDone == true %}
+                <tr class="bg-info">
+                    {% endif %}
                     <td>{{ contract.contractNum }}</td>
                     <td>{{ contract.createdAt.format("Y.m.d") }}</td>
                     <td>{{ contract.deadlineAt.format("Y.m.d") }}</td>
@@ -43,6 +46,7 @@
                     <td>{{ contract.sumSlopeWork }}</td>
                     <td>{{ contract.additionalWorkSum }}</td>
                     <td><a href="{{ path('create_salary',{contract_id:contract.id}) }}">fix salary</a></td>
+                    <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
                 </tr>
 
             {% endfor %}

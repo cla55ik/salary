@@ -23,6 +23,7 @@ class ContractRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.is_done = false')
+            ->orderBy('c.created_at')
             ->getQuery()
             ->getResult()
             ;
@@ -32,6 +33,7 @@ class ContractRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.is_done = true')
+            ->orderBy('c.created_at')
             ->getQuery()
             ->getResult()
             ;
