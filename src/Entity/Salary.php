@@ -45,6 +45,11 @@ class Salary
      */
     private $money_move;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="salaries")
+     */
+    private $contract;
+
     public function __construct()
     {
         $this->money_move = new ArrayCollection();
@@ -143,6 +148,18 @@ class Salary
                 $moneyMove->setSalary(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getContract(): ?Contract
+    {
+        return $this->contract;
+    }
+
+    public function setContract(?Contract $contract): self
+    {
+        $this->contract = $contract;
 
         return $this;
     }

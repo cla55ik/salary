@@ -47,6 +47,11 @@ class MoneyMove
      */
     private $money_payer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Purpose::class)
+     */
+    private $purpose;
+
 
     public function getId(): ?int
     {
@@ -121,6 +126,18 @@ class MoneyMove
     public function setMoneyPayer(?Company $money_payer): self
     {
         $this->money_payer = $money_payer;
+
+        return $this;
+    }
+
+    public function getPurpose(): ?Purpose
+    {
+        return $this->purpose;
+    }
+
+    public function setPurpose(?Purpose $purpose): self
+    {
+        $this->purpose = $purpose;
 
         return $this;
     }

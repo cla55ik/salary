@@ -13,7 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
-use Symfony\Component\Validator\Constraints\DateTime;
+
 
 
 class MoneyMoveCrudController extends AbstractCrudController
@@ -46,9 +46,9 @@ class MoneyMoveCrudController extends AbstractCrudController
         yield NumberField::new('sum');
         yield DateField::new('created_at');
         yield AssociationField::new('money_move_type');
-//        yield AssociationField::new('purpose');
-//        yield AssociationField::new('pay_owner');
-//        yield AssociationField::new('pay_recipient');
+        yield AssociationField::new('purpose');
+        yield AssociationField::new('money_owner');
+        yield AssociationField::new('money_payer');
 //        yield AssociationField::new('salary');
 
     }

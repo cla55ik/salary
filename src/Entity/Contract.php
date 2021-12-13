@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContractRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -137,6 +139,16 @@ class Contract
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="contracts")
      */
     private $owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Salary::class, mappedBy="contract")
+     */
+    private $salaries;
+
+    public function __construct()
+    {
+        $this->salaries = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -427,6 +439,36 @@ class Contract
     public function setOwner(?Company $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Salary[]
+     */
+    public function getSalaries(): Collection
+    {
+        return $this->salaries;
+    }
+
+    public function addSalary(Salary $salary): self
+    {
+        if (!$this->salaries->contains($salary)) {
+            $this->salaries[] = $salary;
+            $salary->setContract($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalary(Salary $salary): self
+    {
+        if ($this->salaries->removeElement($salary)) {
+            // set the owning side to null (unless already changed)
+            if ($salary->getContract() === $this) {
+                $salary->setContract(null);
+            }
+        }
 
         return $this;
     }
