@@ -5,6 +5,7 @@ namespace App\Controller\Main;
 use App\Entity\Contract;
 use App\Entity\Salary;
 use App\Entity\SalaryType;
+use App\Service\SalaryService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,12 +17,12 @@ class SalaryController extends AbstractController
 {
 
     private EntityManagerInterface $em;
-    private $contract_id = null;
+    private SalaryService $salaryService;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, SalaryService $salaryService)
     {
         $this->em = $em;
-
+        $this->salaryService = $salaryService;
     }
 
     /**
@@ -42,8 +43,7 @@ class SalaryController extends AbstractController
             return $this->redirectToRoute('contract');
         }
 
-//dd($this->isSalaryIsset($contract->getId()));
-        if(!$this->isSalaryIsset($contract->getId())){
+        if(!$this->salaryService->isSalaryIssetByContract($contract->getId())){
             $this->addFlash(
                 'notice',
                 'Salary is already exists'
@@ -62,7 +62,7 @@ class SalaryController extends AbstractController
         $salary->setEmployee($employee_id);
         $salary->setContract($contract);
         $salary->setSum($sum);
-//        dd($salary->getContract()->getId());
+
         $em->persist($salary);
         $em->flush();
 
@@ -74,12 +74,5 @@ class SalaryController extends AbstractController
         return $this->redirectToRoute('contract');
     }
 
-    /**
-     * @param int $contract_id
-     * @return boolean
-     */
-    private function isSalaryIsset(int $contract_id): bool
-    {
-        return !$this->em->getRepository(Salary::class)->findOneBy(['contract' => $contract_id]);
-    }
+
 }
