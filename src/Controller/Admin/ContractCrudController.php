@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contract;
+use App\Entity\EmployeesPost;
+use App\Repository\EmployeesRepository;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -65,7 +68,17 @@ class ContractCrudController extends AbstractCrudController
         yield NumberField::new('slopes_width')
             ->setLabel('slope w');
         yield AssociationField::new('employee_worker')
-            ->setLabel('worker');
+            ->setLabel('worker')
+            ->setQueryBuilder(function (QueryBuilder $qb){
+                return $qb
+                    ->andWhere('entity.employee_post = :montage')
+                    ->andWhere('entity.is_active = true')
+                    ->setParameter('montage', 2)
+                    ->getQuery()
+                    ->getResult()
+                    ;
+            })
+        ;
         yield BooleanField::new('is_done');
         yield NumberField::new('cost_product')
             ->setLabel('Закупка продукта')

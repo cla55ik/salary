@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Employees;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,16 @@ class EmployeesRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Employees::class);
+    }
+
+    public function findMontage()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.employee_post = :montage')
+            ->setParameter('montage', 'montage')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     // /**
