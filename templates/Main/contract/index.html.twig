@@ -27,6 +27,7 @@
                 <th>Montage Work</th>
                 <th>Slopes Work</th>
                 <th>Add Work</th>
+                <th>Salaries</th>
                 <th>FixSalary</th>
                 <th>Edit</th>
             </tr>
@@ -45,6 +46,7 @@
                     <td>{{ contract.productWorkSum }}</td>
                     <td>{{ contract.sumSlopeWork }}</td>
                     <td>{{ contract.additionalWorkSum }}</td>
+                    <td>{{ contract.salaries.count }}</td>
                     <td><a href="{{ path('create_salary',{contract_id:contract.id}) }}">fix salary</a></td>
                     <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
                 </tr>

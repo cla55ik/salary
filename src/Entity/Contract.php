@@ -145,6 +145,28 @@ class Contract
      */
     private $salaries;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $base_sum;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prepayment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Employees::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $manager;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Employees::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $measuring;
+
     public function __construct()
     {
         $this->salaries = new ArrayCollection();
@@ -474,6 +496,54 @@ class Contract
                 $salary->setContract(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBaseSum(): ?float
+    {
+        return $this->base_sum;
+    }
+
+    public function setBaseSum(?float $base_sum): self
+    {
+        $this->base_sum = $base_sum;
+
+        return $this;
+    }
+
+    public function getPrepayment(): ?float
+    {
+        return $this->prepayment;
+    }
+
+    public function setPrepayment(float $prepayment): self
+    {
+        $this->prepayment = $prepayment;
+
+        return $this;
+    }
+
+    public function getManager(): ?Employees
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Employees $manager): self
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    public function getMeasuring(): ?Employees
+    {
+        return $this->measuring;
+    }
+
+    public function setMeasuring(?Employees $measuring): self
+    {
+        $this->measuring = $measuring;
 
         return $this;
     }
