@@ -93,18 +93,18 @@ class ContractFormType extends AbstractType
 //            ->add('cost_another', NumberType::class)
 //            ->add('cost_all', NumberType::class)
 //            ->add('earning', NumberType::class)
-            ->add('employeeWorker', EntityType::class, [
-                'label'=>'Worker',
-                'class'=>Employees::class,
-                'query_builder'=>function(EmployeesRepository $repository){
-                    return $repository->createQueryBuilder('c')
-                        ->andWhere('c.is_active=true')
-                        ->andWhere('c.employee_post=2')
-                        ->orderBy('c.name', 'ASC');
-                },
-                'choice_label'=>'name',
-                'attr'=>['data-select'=>'true','class'=>'register-form-select']
-            ])
+//            ->add('employeeWorker', EntityType::class, [
+//                'label'=>'Worker',
+//                'class'=>Employees::class,
+//                'query_builder'=>function(EmployeesRepository $repository){
+//                    return $repository->createQueryBuilder('c')
+//                        ->andWhere('c.is_active=true')
+//                        ->andWhere('c.employee_post=2')
+//                        ->orderBy('c.name', 'ASC');
+//                },
+//                'choice_label'=>'name',
+//                'attr'=>['data-select'=>'true','class'=>'register-form-select']
+//            ])
             ->add('submit', SubmitType::class);
         ;
     }
