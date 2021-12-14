@@ -18,14 +18,14 @@ class MoneyMoveFormType extends AbstractType
         $builder
             ->add('sum', NumberType::class)
             ->add('created_at')
-//            ->add('money_move_type', EntityType::class,[
-//                'label'=>'MoveType',
-//                'class'=>MoneyMoveType::class,
-//                'query_builder'=>function(MoneyMoveTypeRepository $repository){
-//                    return $repository->createQueryBuilder('c')
-//                        ->andWhere('c.name is not null');
-//                }
-//            ])
+            ->add('money_move_type', EntityType::class,[
+                'label'=>'MoveType',
+                'class'=>MoneyMoveType::class,
+                'query_builder'=>function(MoneyMoveTypeRepository $repository){
+                    return $repository->createQueryBuilder('c')
+                        ->andWhere('c.name is not null');
+                }
+            ])
             ->add('salary')
             ->add('money_owner')
             ->add('money_payer')

@@ -21,19 +21,18 @@ class MoneyMoveController extends AbstractController
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->$em = $em;
+        $this->em = $em;
     }
 
 
     /**
      * @Route ("money", name="money")
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request): Response
     {
-        $moneyRepository = $entityManager->getRepository(MoneyMove::class);
+        $moneyRepository = $this->em->getRepository(MoneyMove::class);
         $status = $request->get('status');
 
         if(!in_array($status,self::MONEY_TYPE)){
@@ -46,7 +45,7 @@ class MoneyMoveController extends AbstractController
             ]);
         }
 
-        $moneyMoveTypeRepo = $entityManager->getRepository(MoneyMoveFormType::class);
+        $moneyMoveTypeRepo = $this->em->getRepository(MoneyMoveFormType::class);
         return $this->render('Main/money_move/index.html.twig',[
             'money'=>$moneyRepository->findBy(['money_move_type'=>$moneyMoveTypeRepo->findOneBy(['name'=>"{$status}"])->getId()])
         ]);
