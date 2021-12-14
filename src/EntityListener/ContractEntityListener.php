@@ -3,6 +3,7 @@
 namespace App\EntityListener;
 
 use App\Entity\Contract;
+use App\Entity\MoneyMove;
 use App\Service\MoneyService;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -28,7 +29,7 @@ class ContractEntityListener
         $contract->setIsDone(false);
         $this->setDeadlineDate($contract);
         $this->setDiscount($contract);
-        $this->createMoneyMove($contract);
+//        $this->createMoneyMove($contract);
 //        $this->recalculateWorkSum($contract);
 //        $this->recalculateSum($contract);
 //        $this->recalculateCost($contract);
@@ -43,7 +44,7 @@ class ContractEntityListener
     {
         $this->setDeadlineDate($contract);
         $this->setDiscount($contract);
-        $this->createMoneyMove($contract);
+//        $this->createMoneyMove($contract);
 //        $this->recalculateWorkSum($contract);
 //        $this->recalculateSum($contract);
 //        $this->recalculateCost($contract);
@@ -62,6 +63,18 @@ class ContractEntityListener
 
     private function createMoneyMove(Contract $contract)
     {
+        if ($contract->getPrepayment() > 0){
+            $moneyMove = new MoneyMove();
+            $moneyMove->setMoneyOwner($contract->getOwner());
+            $moneyMove->setCreatedAt(new \DateTime());
+            $moneyMove->setSum($contract->getPrepayment());
+            $moneyMove->setMoneyPayer($contract->getOwner());
+            $moneyMove->setContract($contract);
+//            $moneyMove->setMoneyMoveType();
+
+            $contract->addMoneyMove($moneyMove);
+//            dd($contract);
+        }
 
     }
 
