@@ -8,6 +8,7 @@ use App\Entity\SalaryType;
 use App\Service\SalaryService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,6 +94,20 @@ class SalaryController extends AbstractController
 
         return $this->redirectToRoute('contract');
     }
+
+    /**
+     * @Route ("/salary_modal", name="salary_modal")
+     * @return JsonResponse
+     */
+    public function salaryModal():JsonResponse
+    {
+        $errors = [];
+        $title = 'Add Salary';
+        $form = $this->renderView('Main/modal/salary_montage_modal.html.twig', compact('errors'));
+
+        return $this->json(compact('title', 'form'));
+    }
+
 
 
 }

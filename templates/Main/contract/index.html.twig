@@ -64,6 +64,7 @@
                 <td>{{ contract.profile }}</td>
                     <td><a href="{{ path('create_salary',{contract_id:contract.id}) }}">fix salary</a></td>
                     <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
+                    <td><a href="#" class="header__user-links" data-link="{{ path('salary_modal') }}" data-toggle="modal" data-target="#salary-modal">addSalary</a></td>
                 </tr>
 
             {% endfor %}
