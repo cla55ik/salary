@@ -172,6 +172,11 @@ class Contract
      */
     private $discount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Profile::class)
+     */
+    private $profile;
+
     public function __construct()
     {
         $this->salaries = new ArrayCollection();
@@ -561,6 +566,18 @@ class Contract
     public function setDiscount(?float $discount): self
     {
         $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?Profile $profile): self
+    {
+        $this->profile = $profile;
 
         return $this;
     }
