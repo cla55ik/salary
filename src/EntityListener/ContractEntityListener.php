@@ -3,7 +3,6 @@
 namespace App\EntityListener;
 
 use App\Entity\Contract;
-use App\Entity\MoneyMove;
 use App\Service\MoneyService;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -28,11 +27,8 @@ class ContractEntityListener
     {
         $contract->setIsDone(false);
         $this->setDeadlineDate($contract);
+        $this->recalculateWorkSum($contract);
         $this->setDiscount($contract);
-//        $this->createMoneyMove($contract);
-//        $this->recalculateWorkSum($contract);
-//        $this->recalculateSum($contract);
-//        $this->recalculateCost($contract);
     }
 
     /**
@@ -43,12 +39,8 @@ class ContractEntityListener
     public function preUpdate(Contract $contract, LifecycleEventArgs $event):void
     {
         $this->setDeadlineDate($contract);
+        $this->recalculateWorkSum($contract);
         $this->setDiscount($contract);
-//        $this->createMoneyMove($contract);
-//        $this->recalculateWorkSum($contract);
-//        $this->recalculateSum($contract);
-//        $this->recalculateCost($contract);
-//        $this->recalculateEarning($contract);
     }
 
     /**
@@ -61,22 +53,6 @@ class ContractEntityListener
         //Don't need now
     }
 
-    private function createMoneyMove(Contract $contract)
-    {
-        if ($contract->getPrepayment() > 0){
-            $moneyMove = new MoneyMove();
-            $moneyMove->setMoneyOwner($contract->getOwner());
-            $moneyMove->setCreatedAt(new \DateTime());
-            $moneyMove->setSum($contract->getPrepayment());
-            $moneyMove->setMoneyPayer($contract->getOwner());
-            $moneyMove->setContract($contract);
-//            $moneyMove->setMoneyMoveType();
-
-            $contract->addMoneyMove($moneyMove);
-//            dd($contract);
-        }
-
-    }
 
     private function setDiscount(Contract $contract):void
     {
@@ -150,7 +126,6 @@ class ContractEntityListener
      */
     private function recalculateCost(Contract $contract) : void
     {
-//        dd($contract->getCostProduct(),$contract->getCostAdditional(),$contract->getProductWorkSum(),$contract->getAdditionalWorkSum(),$contract->getSumSlopeWork());
         $contract->setCostAll($contract->getCostProduct() + $contract->getCostAdditional() + $contract->getProductWorkSum() + $contract->getAdditionalWorkSum() + $contract->getCostAnother() + $contract->getSumSlopeWork());
     }
 
@@ -162,6 +137,7 @@ class ContractEntityListener
     {
         $contract->setEarning($contract->getSum() - $contract->getCostAll());
     }
+
 
 
 }

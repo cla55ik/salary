@@ -182,6 +182,11 @@ class Contract
      */
     private $payment_type;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $product_type;
+
     public function __construct()
     {
         $this->salaries = new ArrayCollection();
@@ -595,6 +600,18 @@ class Contract
     public function setPaymentType(?PaymentType $payment_type): self
     {
         $this->payment_type = $payment_type;
+
+        return $this;
+    }
+
+    public function getProductType(): ?string
+    {
+        return $this->product_type;
+    }
+
+    public function setProductType(?string $product_type): self
+    {
+        $this->product_type = $product_type;
 
         return $this;
     }

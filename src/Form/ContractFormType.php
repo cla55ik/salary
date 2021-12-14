@@ -49,6 +49,7 @@ class ContractFormType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('period', NumberType::class)
+            ->add('productType', TextType::class)
             ->add('profile', EntityType::class,[
                 'label'=>'profile',
                 'class'=>Profile::class,
