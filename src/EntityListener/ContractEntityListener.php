@@ -3,6 +3,7 @@
 namespace App\EntityListener;
 
 use App\Entity\Contract;
+use App\Service\MoneyService;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ContractEntityListener
@@ -27,6 +28,7 @@ class ContractEntityListener
         $contract->setIsDone(false);
         $this->setDeadlineDate($contract);
         $this->setDiscount($contract);
+//        $this->createMoneyMove($contract);
 //        $this->recalculateWorkSum($contract);
 //        $this->recalculateSum($contract);
 //        $this->recalculateCost($contract);
@@ -41,6 +43,7 @@ class ContractEntityListener
     {
         $this->setDeadlineDate($contract);
         $this->setDiscount($contract);
+//        $this->createMoneyMove($contract);
 //        $this->recalculateWorkSum($contract);
 //        $this->recalculateSum($contract);
 //        $this->recalculateCost($contract);
@@ -55,6 +58,12 @@ class ContractEntityListener
     public function postUpdate(Contract $contract, LifecycleEventArgs $event) :void
     {
         //Don't need now
+    }
+
+    private function createMoneyMove(Contract $contract)
+    {
+        $serviceMoney = new MoneyService();
+        $serviceMoney->createMoneyMovePayment($contract);
     }
 
     private function setDiscount(Contract $contract):void

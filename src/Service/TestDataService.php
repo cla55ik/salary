@@ -7,6 +7,7 @@ use App\Entity\EmployeesPost;
 use App\Entity\MoneyMoveType;
 use App\Entity\PaymentType;
 use App\Entity\Profile;
+use App\Entity\Purpose;
 use App\Entity\SalaryType;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -41,6 +42,15 @@ class TestDataService
         'terminal',
         'instalment',
         'card'
+    ];
+
+    private const PURPOSE_NAMES = [
+      'salary',
+      'payment',
+      'manufactures',
+      'office',
+      'marketing',
+      'vendor'
     ];
 
 
@@ -141,6 +151,19 @@ class TestDataService
                 $payment_type = new PaymentType();
                 $payment_type->setName($payment_name);
                 $this->entityManager->persist($payment_type);
+                $this->entityManager->flush();
+            }
+        }
+    }
+
+    public function createPurposes()
+    {
+        $purposes_repo = $this->entityManager->getRepository(Purpose::class);
+        foreach(self::PURPOSE_NAMES as $purpose_name){
+            if (!$purposes_repo->findOneBy(['name'=>$purpose_name])){
+                $purpose = new Purpose();
+                $purpose->setName($purpose_name);
+                $this->entityManager->persist($purpose);
                 $this->entityManager->flush();
             }
         }
