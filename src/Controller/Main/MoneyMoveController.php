@@ -3,12 +3,13 @@
 namespace App\Controller\Main;
 
 use App\Entity\MoneyMove;
-use App\Entity\MoneyMoveType;
+use App\Form\MoneyMoveFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class MoneyMoveController extends AbstractController
 {
@@ -16,16 +17,16 @@ class MoneyMoveController extends AbstractController
       'cost',
       'entry'
     ];
+    private EntityManagerInterface $em;
 
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->entityManager=$entityManager;
+        $this->$em = $em;
     }
 
+
     /**
-     * @Route ("money_move", name="money_move")
+     * @Route ("money", name="money")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return Response
@@ -45,14 +46,31 @@ class MoneyMoveController extends AbstractController
             ]);
         }
 
-        $moneyMoveTypeRepo = $entityManager->getRepository(MoneyMoveType::class);
+        $moneyMoveTypeRepo = $entityManager->getRepository(MoneyMoveFormType::class);
         return $this->render('Main/money_move/index.html.twig',[
             'money'=>$moneyRepository->findBy(['money_move_type'=>$moneyMoveTypeRepo->findOneBy(['name'=>"{$status}"])->getId()])
         ]);
 
+    }
 
+    /**
+     * @Route ("/money/create", name="money_create")
+     * @param Request $request
+     * @return Response
+     */
+    public function createMoneyMove(Request $request):Response
+    {
+        $form = $this->createForm(MoneyMoveFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $money = $form->getData();
+            $this->em->persist($money);
+            $this->em->flush();
+        }
 
-
+        return $this->render('Main/money_move/create.html.twig',[
+           'create_form'=>$form->createView()
+        ]);
     }
 
 }

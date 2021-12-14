@@ -6,10 +6,10 @@
 </style>
 
 <div class="container">
-    <a href="{{ path('money_move',{status:null}) }}">all</a>
-    <a href="{{ path('money_move',{status:'cost'}) }}">cost</a>
-    <a href="{{ path('money_move',{status:'entry'}) }}">entry</a>
-    <a href="">create</a>
+    <a href="{{ path('money',{status:null}) }}">all</a>
+    <a href="{{ path('money',{status:'cost'}) }}">cost</a>
+    <a href="{{ path('money',{status:'entry'}) }}">entry</a>
+    <a href="{{ path('money_create') }}">create</a>
 </div>
     {% for error in app.flashes('notice') %}
     <div class="container alert alert-secondary">

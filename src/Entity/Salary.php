@@ -48,11 +48,16 @@ class Salary
     /**
      * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="salaries")
      */
-    private $contract;
+    private ?Contract $contract;
 
     public function __construct()
     {
         $this->money_move = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getSum();
     }
 
     /**
