@@ -3,6 +3,7 @@
 namespace App\Controller\Main;
 
 use App\Entity\MoneyMove;
+use App\Entity\MoneyMoveType;
 use App\Form\MoneyMoveFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,17 +36,23 @@ class MoneyMoveController extends AbstractController
         $moneyRepository = $this->em->getRepository(MoneyMove::class);
         $status = $request->get('status');
 
+
         if(!in_array($status,self::MONEY_TYPE)){
-            $this->addFlash(
-                'notice',
-                'error of type'
-            );
+            if ($status){
+                $this->addFlash(
+                    'notice',
+                    'error of type'
+                );
+            }
+
             return $this->render('Main/money_move/index.html.twig',[
                 'money'=>$moneyRepository->findAll()
             ]);
         }
 
-        $moneyMoveTypeRepo = $this->em->getRepository(MoneyMoveFormType::class);
+
+
+        $moneyMoveTypeRepo = $this->em->getRepository(MoneyMoveType::class);
         return $this->render('Main/money_move/index.html.twig',[
             'money'=>$moneyRepository->findBy(['money_move_type'=>$moneyMoveTypeRepo->findOneBy(['name'=>"{$status}"])->getId()])
         ]);
@@ -59,7 +66,7 @@ class MoneyMoveController extends AbstractController
      */
     public function createMoneyMove(Request $request):Response
     {
-        $form = $this->createForm(MoneyMoveFormType::class);
+        $form = $this->createForm(MoneyMoveType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $money = $form->getData();
