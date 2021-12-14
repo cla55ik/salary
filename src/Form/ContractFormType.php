@@ -5,8 +5,10 @@ namespace App\Form;
 use App\Entity\Company;
 use App\Entity\Contract;
 use App\Entity\Employees;
+use App\Entity\Profile;
 use App\Repository\CompanyRepository;
 use App\Repository\EmployeesRepository;
+use App\Repository\ProfileRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -45,6 +47,16 @@ class ContractFormType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('period', NumberType::class)
+            ->add('profile', EntityType::class,[
+                'label'=>'profile',
+                'class'=>Profile::class,
+                'query_builder'=>function(ProfileRepository $profileRepository){
+                    return $profileRepository->createQueryBuilder('c')
+                        ->orderBy('c.id', 'ASC');
+                },
+                'choice_label'=>'name',
+                'attr'=>['data-selected'=>'true', 'class'=>'register-form-select']
+            ])
             ->add('baseSum', NumberType::class)
             ->add('productArea', NumberType::class)
             ->add('slopesLength', NumberType::class)
