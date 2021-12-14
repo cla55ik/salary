@@ -59,7 +59,7 @@ class ContractEntityListener
 
     private function setDiscount(Contract $contract):void
     {
-        $contract->setDiscount(($contract->getSum()/$contract->getBaseSum() - 1)*100*-1);
+        $contract->setDiscount(ceil(($contract->getSum()/$contract->getBaseSum() - 1)*100*-1));
     }
 
     /**

@@ -17,37 +17,51 @@
         </div>
         <table class="table table-responsive">
             <tr>
-                <th>Num</th>
                 <th>createdAt</th>
+                <th>Num</th>
                 <th>deadline</th>
                 <th>Customer</th>
-                <th>сумма договора</th>
-                <th>Затраты</th>
-                <th>Profit</th>
-                <th>Worker</th>
-                <th>Montage Work</th>
-                <th>Slopes Work</th>
+                <th>база</th>
+                <th>S изделий</th>
+                <th>Slope L</th>
+                <th>Slope W</th>
                 <th>Add Work</th>
-                <th>Salaries</th>
-                <th>FixSalary</th>
+                <th>Sum</th>
+                <th>PrePay</th>
+                <th>PayMet</th>
+                <th>Measures</th>
+                <th>Manager</th>
+                <th>Result</th>
+                <th>ReMeasure</th>
+                <th>Discount</th>
+                <th>ProdType</th>
+                <th>Profile</th>
                 <th>Edit</th>
             </tr>
             {% for contract in contracts %}
                 {% if contract.isDone == true %}
                 <tr class="bg-info">
                     {% endif %}
-                    <td>{{ contract.contractNum }}</td>
-                    <td>{{ contract.createdAt.format("Y.m.d") }}</td>
-                    <td>{{ contract.deadlineAt.format("Y.m.d") }}</td>
-                    <td>{{ contract.customer }}</td>
-                    <td>{{ contract.sum }}</td>
-                    <td>{{ contract.costAll }}</td>
-                    <td>{{ contract.earning }}</td>
-                    <td>{{ contract.employeeWorker }}</td>
-                    <td>{{ contract.productWorkSum }}</td>
-                    <td>{{ contract.sumSlopeWork }}</td>
-                    <td>{{ contract.additionalWorkSum }}</td>
-                    <td>{{ contract.salaries.count }}</td>
+
+                <td>{{ contract.createdAt.format("Y.m.d") }}</td>
+                <td>{{ contract.contractNum }}</td>
+                <td>{{ contract.deadlineAt.format("Y.m.d") }}</td>
+                <td>{{ contract.customer }}</td>
+                <td>{{ contract.baseSum }}</td>
+                <td>{{ contract.productArea }}</td>
+                <td>{{ contract.slopesLength }}</td>
+                <td>{{ contract.slopesWidth }}</td>
+                <td>{{ contract.additionalSum }}</td>
+                <td>{{ contract.sum }}</td>
+                <td>{{ contract.prepayment }}</td>
+                <td>need</td>
+                <td>{{ contract.measuring }}</td>
+                <td>{{ contract.manager }}</td>
+                <td>need</td>
+                <td>need</td>
+                <td>{{ contract.discount }}%</td>
+                <td>need</td>
+                <td>need</td>
                     <td><a href="{{ path('create_salary',{contract_id:contract.id}) }}">fix salary</a></td>
                     <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
                 </tr>
