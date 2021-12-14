@@ -167,6 +167,11 @@ class Contract
      */
     private ?Employees $measuring;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $discount;
+
     public function __construct()
     {
         $this->salaries = new ArrayCollection();
@@ -544,6 +549,18 @@ class Contract
     public function setMeasuring(?Employees $measuring): self
     {
         $this->measuring = $measuring;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
 
         return $this;
     }
