@@ -44,9 +44,7 @@ class ContractFormType extends AbstractType
             ->add('created_at', DateType::class,[
                 'widget' => 'single_text',
             ])
-            ->add('deadline_at', DateType::class, [
-                'widget' => 'single_text'
-            ])
+            ->add('period', NumberType::class)
             ->add('baseSum', NumberType::class)
             ->add('productArea', NumberType::class)
             ->add('slopesLength', NumberType::class)
