@@ -4,6 +4,9 @@
 
 {% block body %}
     <div class="container">
+        <a href="{{ path('contract') }}">list all</a>
+    </div>
+    <div class="container">
         <h3>edit contract {{ contract.contractNum }}</h3>
         {{ form(contract_form) }}
     </div>

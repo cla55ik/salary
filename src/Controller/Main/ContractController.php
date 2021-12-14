@@ -58,9 +58,14 @@ class ContractController extends AbstractController
      * @param Contract $contract
      * @return Response
      */
-    public function edit(Contract $contract):Response
+    public function edit(Contract $contract, Request $request):Response
     {
         $form = $this->createForm(ContractFormType::class, $contract);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $this->entityManager->flush();
+        }
 
         return $this->render('Main/contract/edit.html.twig',[
             'contract'=> $contract,
