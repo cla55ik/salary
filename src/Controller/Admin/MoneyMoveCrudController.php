@@ -49,6 +49,7 @@ class MoneyMoveCrudController extends AbstractCrudController
         yield AssociationField::new('purpose');
         yield AssociationField::new('money_owner');
         yield AssociationField::new('money_payer');
+
 //        yield AssociationField::new('salary');
 
     }

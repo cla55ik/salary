@@ -30,27 +30,27 @@ class MoneyMove
     /**
      * @ORM\ManyToOne(targetEntity=MoneyMoveType::class, inversedBy="moneyMoves")
      */
-    private $money_move_type;
+    private ?MoneyMoveType $money_move_type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Salary::class, inversedBy="money_move")
      */
-    private $salary;
+    private ?Salary $salary;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class)
      */
-    private $money_owner;
+    private ?Company $money_owner;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class)
      */
-    private $money_payer;
+    private ?Company $money_payer;
 
     /**
      * @ORM\ManyToOne(targetEntity=Purpose::class)
      */
-    private $purpose;
+    private ?Purpose $purpose;
 
 
     public function getId(): ?int

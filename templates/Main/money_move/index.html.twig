@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+
+</style>
+
+<div class="container">
+    <a href="{{ path('money_move',{status:null}) }}">all</a>
+    <a href="{{ path('money_move',{status:'cost'}) }}">cost</a>
+    <a href="{{ path('money_move',{status:'entry'}) }}">entry</a>
+    <a href="">create</a>
+</div>
+    {% for error in app.flashes('notice') %}
+    <div class="container alert alert-secondary">
+        {{ error }}
+    </div>
+    {% endfor %}
+<div class="container">
+    <table class="table table-responsive">
+        <tr>
+            <th>id</th>
+            <th>createdAt</th>
+            <th>sum</th>
+            <th>MoveType</th>
+            <th>moneyOwner</th>
+            <th>moneyPayer</th>
+            <th>purpose</th>
+            <th>salary</th>
+
+        </tr>
+
+    {% for mon in money %}
+        <tr>
+            <td>{{ mon.id }}</td>
+            <td>{{ mon.createdAt.format('Y.m.d') }}</td>
+            <td>{{ mon.sum }}</td>
+            <td>{{ mon.moneyMoveType }}</td>
+            <td>{{ mon.moneyOwner }}</td>
+            <td>{{ mon.moneyPayer }}</td>
+            <td>{{ mon.purpose }}</td>
+            <td>{{ mon.salary }}</td>
+
+        </tr>
+    </table>
+    {% endfor %}
+
+</div>
+{% endblock %}

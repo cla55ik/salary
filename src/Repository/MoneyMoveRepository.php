@@ -19,6 +19,7 @@ class MoneyMoveRepository extends ServiceEntityRepository
         parent::__construct($registry, MoneyMove::class);
     }
 
+
     // /**
     //  * @return MoneyMove[] Returns an array of MoneyMove objects
     //  */
