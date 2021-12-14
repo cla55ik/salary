@@ -15,5 +15,7 @@ import bsCustomFileInput from "bs-custom-file-input";
 import './bootstrap';
 bsCustomFileInput.init();
 
+// import 'core-js/es/array';
+
 
 

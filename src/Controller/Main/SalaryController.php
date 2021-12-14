@@ -28,6 +28,17 @@ class SalaryController extends AbstractController
     }
 
     /**
+     * @Route ("/salary_open_modal", name="salary_open_modal")
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function openModal(Request $request): RedirectResponse
+    {
+//        dd('a');
+        return $this->redirectToRoute('salary_modal');
+    }
+
+    /**
      * @Route ("/salary/create/{contract_id}", name="create_salary")
      * @param Request $request
      * @param EntityManagerInterface $em
