@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Employees;
 use App\Entity\EmployeesPost;
 use App\Entity\MoneyMoveType;
+use App\Entity\Profile;
 use App\Entity\SalaryType;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -24,6 +25,14 @@ class TestDataService
       'manager',
       'montage',
       'measuring'
+    ];
+
+    private const PROFILE = [
+      'Veka',
+      'Rehau',
+      'Al',
+      'Novotex',
+      'KBE'
     ];
 
 
@@ -101,6 +110,19 @@ class TestDataService
             }
         }
 
+    }
+
+    public function createTestProfiles()
+    {
+        $profiles = $this->entityManager->getRepository(Profile::class);
+        foreach (self::PROFILE as $profile_name){
+            if (!$profiles->findOneBy('name',$profile_name)){
+                $profile = new Profile();
+                $profile->setName($profile_name);
+                $this->entityManager->persist($profile);
+                $this->entityManager->flush();
+            }
+        }
     }
 
 }
