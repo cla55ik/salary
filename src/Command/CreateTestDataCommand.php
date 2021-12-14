@@ -47,7 +47,7 @@ class CreateTestDataCommand extends Command
         $this->testDataService->createTestEmployeePost();
         $this->testDataService->createTestEmployees();
         $this->testDataService->createTestProfiles();
-
+        $this->testDataService->createTestPaymentType();
 
         return 0;
 

@@ -61,7 +61,7 @@
                 <td>need</td>
                 <td>{{ contract.discount }}%</td>
                 <td>need</td>
-                <td>need</td>
+                <td>{{ contract.profile }}</td>
                     <td><a href="{{ path('create_salary',{contract_id:contract.id}) }}">fix salary</a></td>
                     <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
                 </tr>

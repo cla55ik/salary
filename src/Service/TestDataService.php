@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Employees;
 use App\Entity\EmployeesPost;
 use App\Entity\MoneyMoveType;
+use App\Entity\PaymentType;
 use App\Entity\Profile;
 use App\Entity\SalaryType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,6 +34,13 @@ class TestDataService
       'Al',
       'Novotex',
       'KBE'
+    ];
+
+    private const PAYMENT_TYPE = [
+        'cash',
+        'terminal',
+        'instalment',
+        'card'
     ];
 
 
@@ -120,6 +128,19 @@ class TestDataService
                 $profile = new Profile();
                 $profile->setName($profile_name);
                 $this->entityManager->persist($profile);
+                $this->entityManager->flush();
+            }
+        }
+    }
+
+    public function createTestPaymentType()
+    {
+        $payment_types = $this->entityManager->getRepository(PaymentType::class);
+        foreach (self::PAYMENT_TYPE as $payment_name){
+            if(!$payment_types->findOneBy(['name'=>$payment_name])){
+                $payment_type = new PaymentType();
+                $payment_type->setName($payment_name);
+                $this->entityManager->persist($payment_type);
                 $this->entityManager->flush();
             }
         }

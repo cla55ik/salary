@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\Company;
 use App\Entity\Contract;
 use App\Entity\Employees;
+use App\Entity\PaymentType;
 use App\Entity\Profile;
 use App\Repository\CompanyRepository;
 use App\Repository\EmployeesRepository;
+use App\Repository\PaymentTypeRepository;
 use App\Repository\ProfileRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -63,6 +65,14 @@ class ContractFormType extends AbstractType
             ->add('slopesWidth', NumberType::class)
             ->add('additionalSum', NumberType::class)
             ->add('sum', NumberType::class)
+            ->add('paymentType', EntityType::class, [
+                'label'=>'PayType',
+                'class'=>PaymentType::class,
+                'query_builder'=>function(PaymentTypeRepository $repository){
+                    return $repository->createQueryBuilder('c')
+                        ->orderBy('c.id', 'ASC');
+                }
+            ])
             ->add('prepayment', NumberType::class)
             ->add('manager',EntityType::class,[
                 'label'=>'Manager',

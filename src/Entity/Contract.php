@@ -177,6 +177,11 @@ class Contract
      */
     private $profile;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=PaymentType::class)
+     */
+    private $payment_type;
+
     public function __construct()
     {
         $this->salaries = new ArrayCollection();
@@ -578,6 +583,18 @@ class Contract
     public function setProfile(?Profile $profile): self
     {
         $this->profile = $profile;
+
+        return $this;
+    }
+
+    public function getPaymentType(): ?PaymentType
+    {
+        return $this->payment_type;
+    }
+
+    public function setPaymentType(?PaymentType $payment_type): self
+    {
+        $this->payment_type = $payment_type;
 
         return $this;
     }
