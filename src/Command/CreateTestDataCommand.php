@@ -36,9 +36,9 @@ class CreateTestDataCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return void
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output):int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -46,6 +46,7 @@ class CreateTestDataCommand extends Command
         $this->testDataService->createTestMoneyMoveType();
         $this->testDataService->createTestEmployeePost();
         $this->testDataService->createTestEmployees();
+        $this->testDataService->createTestProfiles();
 
 
         return 0;

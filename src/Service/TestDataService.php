@@ -116,7 +116,7 @@ class TestDataService
     {
         $profiles = $this->entityManager->getRepository(Profile::class);
         foreach (self::PROFILE as $profile_name){
-            if (!$profiles->findOneBy('name',$profile_name)){
+            if (!$profiles->findOneBy(['name'=>$profile_name])){
                 $profile = new Profile();
                 $profile->setName($profile_name);
                 $this->entityManager->persist($profile);
