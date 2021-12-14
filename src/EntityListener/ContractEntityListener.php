@@ -24,10 +24,12 @@ class ContractEntityListener
      */
     public function prePersist(Contract $contract, LifecycleEventArgs $event):void
     {
+        $contract->setIsDone(false);
         $this->setDeadlineDate($contract);
-        $this->recalculateWorkSum($contract);
-        $this->recalculateSum($contract);
-        $this->recalculateCost($contract);
+        $this->setDiscount($contract);
+//        $this->recalculateWorkSum($contract);
+//        $this->recalculateSum($contract);
+//        $this->recalculateCost($contract);
     }
 
     /**
@@ -38,10 +40,11 @@ class ContractEntityListener
     public function preUpdate(Contract $contract, LifecycleEventArgs $event):void
     {
         $this->setDeadlineDate($contract);
-        $this->recalculateWorkSum($contract);
-        $this->recalculateSum($contract);
-        $this->recalculateCost($contract);
-        $this->recalculateEarning($contract);
+        $this->setDiscount($contract);
+//        $this->recalculateWorkSum($contract);
+//        $this->recalculateSum($contract);
+//        $this->recalculateCost($contract);
+//        $this->recalculateEarning($contract);
     }
 
     /**
@@ -52,6 +55,11 @@ class ContractEntityListener
     public function postUpdate(Contract $contract, LifecycleEventArgs $event) :void
     {
         //Don't need now
+    }
+
+    private function setDiscount(Contract $contract):void
+    {
+        $contract->setDiscount(($contract->getSum()/$contract->getBaseSum() - 1)*100*-1);
     }
 
     /**
