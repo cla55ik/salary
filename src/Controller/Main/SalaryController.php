@@ -5,7 +5,9 @@ namespace App\Controller\Main;
 use App\Entity\Contract;
 use App\Entity\Salary;
 use App\Entity\SalaryType;
+use App\Form\SalaryMontageCreateFormType;
 use App\Service\SalaryService;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,6 +38,44 @@ class SalaryController extends AbstractController
     {
 //        dd('a');
         return $this->redirectToRoute('salary_modal');
+    }
+
+    /**
+     * @Route ("/salary/create/montage/{contract_id}", name="salary_create_montage")
+     * @param Request $request
+     * @param EntityManager $em
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function createMontageAccrualByContract(Request $request, EntityManagerInterface $em):Response
+    {
+        $contract = $em->getRepository(Contract::class)->find($request->get('contract_id'));
+
+        if ($contract == null){
+            $this->addFlash(
+                'notice',
+                'Contract is not exists'
+            );
+            return $this->redirectToRoute('contract');
+        }
+
+        $form = $this->createForm(SalaryMontageCreateFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $salary = $form->getData();
+            $em->persist($salary);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Salary has ben save'
+            );
+        }
+
+        return $this->render('Main/salary/create_montage.html.twig',[
+            'create_form'=>$form->createView()
+        ]);
     }
 
     /**

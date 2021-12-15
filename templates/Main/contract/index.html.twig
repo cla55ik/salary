@@ -63,7 +63,7 @@
                 <td>{{ contract.productType }}</td>
                 <td>{{ contract.profile }}</td>
                     <td><a href="{{ path('contract_edit', {id:contract.id}) }}">edit</a></td>
-                    <td><a class="salary-add-btn" href="#" data-link="" data-toggle="modal" data-target="#salary-modal" data-contract_id="{{ contract.id }}">addSalary</a></td>
+                    <td><a href="{{ path('salary_create_montage',{contract_id:contract.id}) }}">addSalary</a></td>
                 </tr>
 
             {% endfor %}

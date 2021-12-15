@@ -9,16 +9,16 @@ $(document).ready(function (){
     });
 });
 
-document.addEventListener('DOMContentLoaded', (e)=>{
-    e.preventDefault();
-    const addSalaries = document.querySelectorAll('.salary-add-btn');
-    const salaryModal = document.querySelector('#salaryCreateForm');
-
-    addSalaries.forEach((salary)=>{
-        salary.addEventListener('click',(e)=>{
-            let contract_id = salary.getAttribute('data-contract_id');
-            salaryModal.setAttribute('action', `/salary/update/${contract_id}`)
-        })
-    })
-
-});
+// document.addEventListener('DOMContentLoaded', (e)=>{
+//     e.preventDefault();
+//     const addSalaries = document.querySelectorAll('.salary-add-btn');
+//     const salaryModal = document.querySelector('#salaryCreateForm');
+//
+//     addSalaries.forEach((salary)=>{
+//         salary.addEventListener('click',(e)=>{
+//             let contract_id = salary.getAttribute('data-contract_id');
+//             salaryModal.setAttribute('action', `/salary/create/montage/${contract_id}`)
+//         })
+//     })
+//
+// });

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+
+    </style>
+
+    <div class="container partition__menu">
+{#        <a href="{{ path('salary',{status:null}) }}">all</a>#}
+{#        <a href="{{ path('salary',{status:'cost'}) }}">cost</a>#}
+{#        <a href="{{ path('salary',{status:'entry'}) }}">entry</a>#}
+{#        <a href="{{ path('salary_create') }}">create</a>#}
+    </div>
+    {% for error in app.flashes('notice') %}
+        <div class="container alert alert-secondary">
+            {{ error }}
+        </div>
+    {% endfor %}
+
+    <div class="container">
+        {{ form(create_form) }}
+    </div>
+{% endblock %}
