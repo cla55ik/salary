@@ -66,16 +66,15 @@ class MoneyMoveController extends AbstractController
      */
     public function createMoneyMove(Request $request):Response
     {
-        $form = $this->createForm(MoneyMoveType::class);
-        $form->handleRequest($request);
+        $form = $this->createForm(MoneyMoveFormType::class);
         if ($form->isSubmitted() && $form->isValid()){
             $money = $form->getData();
             $this->em->persist($money);
             $this->em->flush();
         }
 
-        return $this->render('Main/money_move/create.html.twig',[
-           'create_form'=>$form->createView()
+        return $this->render('Main/money_move/create.html.twig', [
+            'create_form'=>$form->createView()
         ]);
     }
 
