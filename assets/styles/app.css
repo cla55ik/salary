@@ -1,4 +1,28 @@
 @import '~bootstrap/dist/css/bootstrap.css';
+
+.header__menu a{
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.header__menu a:hover{
+    color: #93c5fd;
+}
+
+.partition__menu a{
+    color: #343a40;
+    text-decoration: none;
+    padding: 5px 15px;
+    border: 1px solid #343a40;
+    border-radius: 20px;
+}
+.partition__menu a:hover{
+    background-color: #93c5fd;
+}
+.partition__menu{
+    margin-bottom: 20px;
+}
 /*body {*/
 /*    background-color: lightgray;*/
 /*}*/

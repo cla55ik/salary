@@ -9,7 +9,7 @@
             {{ message }}
         </div>
         {% endfor %}
-        <div>
+        <div class="partition__menu">
             <a href="{{ path('contract', {status:null}) }}">all</a>
             <a href="{{ path('contract', {status:'is_done'}) }}">is done</a>
             <a href="{{ path('contract', {status:'not_done'}) }}">not done</a>

@@ -16,6 +16,15 @@
         {% endblock %}
     </head>
     <body>
+    <header class="bg-dark mb-5">
+        <div class="container p-2 d-flex header__menu">
+            <a href="{{ path('contract') }}">Contracts</a>
+            <a href="{{ path('money') }}">Money</a>
+            <a href="">Salary</a>
+            <a href="">Statistic</a>
+        </div>
+
+    </header>
         {% block body %}{% endblock %}
 
         <div class="modal fade" id="salary-modal" tabindex="-1" aria-labelledby="salary-modal" aria-hidden="true">
