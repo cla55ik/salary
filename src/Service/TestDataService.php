@@ -114,17 +114,18 @@ class TestDataService
         $employee_post = $this->entityManager->getRepository(EmployeesPost::class);
         foreach (self::EMPLOYEE_POST as $post_name){
             $post=$employee_post->findOneBy(['post'=>$post_name]);
-//            dd($post);
 
             for ($i=1; $i<6; $i++){
                 $employee_name = ucfirst($post_name) . $i;
-                $employee = new Employees();
-                $employee->setEmployeePost($post);
-                $employee->setName($employee_name);
-                $employee->setIsActive(true);
+                if (!$employees->findOneBy(['name'=>$employee_name])){
+                    $employee = new Employees();
+                    $employee->setEmployeePost($post);
+                    $employee->setName($employee_name);
+                    $employee->setIsActive(true);
 
-                $this->entityManager->persist($employee);
-                $this->entityManager->flush();
+                    $this->entityManager->persist($employee);
+                    $this->entityManager->flush();
+                }
             }
         }
 
