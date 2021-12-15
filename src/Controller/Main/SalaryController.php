@@ -3,9 +3,11 @@
 namespace App\Controller\Main;
 
 use App\Entity\Contract;
+use App\Entity\Employees;
 use App\Entity\Salary;
 use App\Entity\SalaryType;
 use App\Form\SalaryMontageCreateFormType;
+use App\Repository\EmployeesRepository;
 use App\Service\SalaryService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,16 +31,6 @@ class SalaryController extends AbstractController
         $this->salaryService = $salaryService;
     }
 
-    /**
-     * @Route ("/salary_open_modal", name="salary_open_modal")
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function openModal(Request $request): RedirectResponse
-    {
-//        dd('a');
-        return $this->redirectToRoute('salary_modal');
-    }
 
     /**
      * @Route ("/salary/create/montage/{contract_id}", name="salary_create_montage")
@@ -51,6 +43,8 @@ class SalaryController extends AbstractController
     public function createMontageAccrualByContract(Request $request, EntityManagerInterface $em):Response
     {
         $contract = $em->getRepository(Contract::class)->find($request->get('contract_id'));
+//        $employee_montage = $contract->getManager();
+//        dd($employee_montage);
 
         if ($contract == null){
             $this->addFlash(
@@ -77,6 +71,7 @@ class SalaryController extends AbstractController
             'create_form'=>$form->createView()
         ]);
     }
+
 
     /**
      * @Route ("/salary/create/{contract_id}", name="create_salary")
